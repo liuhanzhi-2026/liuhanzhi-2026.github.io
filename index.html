@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>内容营销产品化体系进度</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green:        #10b981;
+  --green-light:  #d1fae5;
+  --green-dark:   #065f46;
+  --purple:       #8b5cf6;
+  --purple-light: #ede9fe;
+  --purple-dark:  #4c1d95;
+  --blue:         #3b82f6;
+  --blue-light:   #dbeafe;
+  --blue-dark:    #1e3a8a;
+  --orange:       #f59e0b;
+  --orange-light: #fef3c7;
+  --orange-dark:  #92400e;
+  --teal:         #0891b2;
+  --teal-light:   #cffafe;
+  --teal-dark:    #164e63;
+  --gray-light:   #f3f4f6;
+  --gray-mid:     #e5e7eb;
+  --bg:           #eef0f5;
+  --text:         #111827;
+  --text-sub:     #6b7280;
+  --white:        #ffffff;
+  --radius:       12px;
+  --shadow:       0 1px 4px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:    0 4px 14px rgba(0,0,0,0.09);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: hidden; }
+body {
+font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+background: var(--bg);
+color: var(--text);
+min-height: 100vh;
+overflow-x: hidden;
+margin: 0; padding: 0;
+}
+
+/* ══ 导航 ══ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-mid);
+  display: flex; align-items: center;
+  padding: 0 32px; height: 48px;
+}
+.nav-brand {
+  font-size: 12px; font-weight: 600; color: var(--text-sub);
+  margin-right: auto; white-space: nowrap;
+}
+.nav-brand strong { color: var(--text); font-weight: 700; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  font-size: 12px; font-weight: 500; color: var(--text-sub);
+  text-decoration: none; padding: 5px 14px; border-radius: 20px;
+  transition: all 0.15s; white-space: nowrap;
+}
+.nav-link:hover { color: var(--text); background: var(--gray-light); }
+
+/* ══ Header ══ */
+.header {
+  margin-top: 48px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #4c1d95 100%);
+  padding: 20px 32px 20px; color: white;
+  position: relative; overflow: hidden;
+}
+.header::before {
+  content: ''; position: absolute; top: -60px; right: -40px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(255,255,255,0.04); pointer-events: none;
+}
+/* 标题行 */
+.header-top {
+  display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px;
+}
+.header-eyebrow {
+  font-size: 11px; font-weight: 500; opacity: 0.45;
+  letter-spacing: 1.5px;
+}
+.header-title {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.3px; line-height: 1;
+}
+/* 信息条：基础能力 + AI 能力横排一行 */
+.header-infobar {
+  display: flex; align-items: stretch; gap: 0;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: visible;
+  width: fit-content;
+  max-width: 100%;
+}
+.infobar-section {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 16px;
+  flex-shrink: 0;
+}
+.infobar-section + .infobar-section {
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.infobar-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; opacity: 0.4;
+  white-space: nowrap; flex-shrink: 0;
+}
+.infobar-divider {
+  width: 1px; height: 28px; background: rgba(255,255,255,0.1); flex-shrink: 0;
+}
+/* 基础能力小标签 */
+.cap-chips { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.cap-chip {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.cap-chip-num {
+  font-size: 10px; font-weight: 800; opacity: 0.7;
+}
+.cap-chip-name { font-weight: 700; }
+.cap-chip-status {
+  font-size: 9px; font-weight: 600; opacity: 0.75;
+}
+.cc-green  { background: rgba(16,185,129,0.2);  color: #6ee7b7; }
+.cc-yellow { background: rgba(245,158,11,0.2);  color: #fcd34d; }
+.cc-blue   { background: rgba(59,130,246,0.2);  color: #93c5fd; }
+/* AI 能力 pills */
+.ai-pills { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+.ai-pill {
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 3px 10px;
+  white-space: nowrap;
+}
+.ai-pill-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.ai-pill-name { font-size: 11px; font-weight: 700; }
+.ai-pill-state { font-size: 9px; opacity: 0.55; }
+/* 废弃旧样式 */
+.header-panels, .header-panel, .panel-label,
+.cap-list, .cap-row, .cap-num, .cap-info, .cap-name, .cap-meta,
+.cap-status, .cs-green, .cs-yellow, .cs-blue, .cap-note,
+.ai-tags-row { display: none; }
+
+/* ══ 主体 ══ */
+.main {
+  width: 100%; max-width: min(1060px, 100vw); margin: 0 auto;
+  padding: 28px 16px 48px;
+  box-sizing: border-box;
+}
+
+/* ══ 阶段布局 ══ */
+.phase-section {
+  margin-bottom: 20px;
+  padding: 24px 2px 0;
+}
+
+/* 阶段标题行 */
+.phase-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+}
+.phase-badge {
+  font-size: 12px; font-weight: 800; padding: 5px 16px;
+  border-radius: 20px; letter-spacing: 0.3px; white-space: nowrap;
+}
+.phase-badge.pre   { background: var(--purple-light); color: var(--purple-dark); }
+.phase-badge.exec  { background: var(--green-light);  color: var(--green-dark); }
+.phase-badge.recap { background: var(--orange-light); color: var(--orange-dark); }
+.phase-flow {
+  font-size: 11px; color: var(--text-sub);
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+}
+.pf-sep { color: #d1d5db; }
+
+/* ══ 流程行 — 核心：等高 ══ */
+.flow-row {
+  display: grid;
+  grid-template-columns: 1fr 16px 1fr 16px 1fr 16px 1fr;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+}
+/* 投前准备上行：3列 */
+.flow-row.pre-row-top {
+  grid-template-columns: 1fr 20px 1fr 20px 1fr;
+}
+/* 投前准备下行：2列（居中） */
+.flow-row.pre-row-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 8px;
+}
+.flow-row.pre-row-bottom .wf-card {
+  width: calc(33.33% - 10px);
+  flex: none;
+}
+/* 投放执行达人行：整行大卡嵌套 */
+.flow-row.exec-top {
+  display: block;
+  margin-bottom: 10px;
+}
+/* 大容器卡片 */
+.exec-dual-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1.5px solid #c4b5fd;
+  box-shadow: var(--shadow);
+  padding: 18px 20px 16px;
+  position: relative;
+  overflow: visible;
+}
+/* 大卡顶部：模块标签 + 状态 */
+.exec-dual-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.exec-dual-title {
+  font-size: 11px; font-weight: 700; color: #7c3aed;
+  letter-spacing: 0.3px;
+}
+/* 内部两列子卡 */
+.exec-dual-body {
+  display: grid;
+  grid-template-columns: 1fr 32px 1fr;
+  align-items: start;
+  gap: 0;
+}
+/* 子卡 */
+.exec-sub-card {
+  background: #faf5ff;
+  border-radius: 10px;
+  border: 1px solid #ede9fe;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  position: relative;
+  overflow: visible;
+}
+/* 子卡内箭头 */
+.exec-sub-arrow {
+  display: flex; align-items: center; justify-content: center;
+  color: #c4b5fd; font-size: 22px; line-height: 1;
+  padding-top: 8px;
+}
+.exec-sub-arrow::after { content: '›'; }
+/* 子卡 step badge */
+.exec-sub-card .step-badge {
+  margin-top: -20px;
+  margin-left: -2px;
+}
+.exec-sub-card .step-num  { background: #7c3aed; color: #fff; width:24px; height:24px; font-size:12px; border-radius:6px 0 0 6px; }
+.exec-sub-card .step-label{ background: #ede9fe; color: #4c1d95; font-size:8px; height:24px; border-radius:0 6px 6px 0; }
+.exec-sub-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.exec-sub-status { display: inline-flex; align-items: center; }
+.exec-sub-desc { font-size: 12px; color: var(--text-sub); line-height: 1.55; }
+.exec-sub-caps { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+
+/* 卡片右上角状态标签 */
+.card-corner-status {
+  position: absolute;
+  top: 12px; right: 14px;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.ccs-green { background: #d1fae5; color: #065f46; }
+/* 投放执行内容行：3列 */
+.flow-row.exec-row {
+  grid-template-columns: 1fr 14px 1fr 14px 1fr;
+}
+/* 复盘沉淀行：4列 */
+.flow-row.recap-row {
+  grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr;
+}
+.flow-row.recap-row .wf-card {
+  min-height: 160px;
+  padding: 11px 11px;
+}
+.flow-row.recap-row .card-title {
+  font-size: 14px;
+}
+.flow-row.recap-row .card-desc {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.flow-row.recap-row .card-status {
+  font-size: 10px;
+}
+
+/* 投前准备连接箭头（向下） */
+.pre-down-arrow {
+  display: flex; align-items: center; justify-content: center;
+  height: 24px; color: #d1d5db; font-size: 16px;
+  margin: 2px 0;
+}
+
+/* 箭头 */
+.flow-arrow {
+  width: 16px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #c4b5fd; font-size: 20px; line-height: 1;
+}
+.flow-arrow::after { content: '›'; }
+
+/* ══ 卡片基础 ══ */
+.wf-card {
+  min-width: 0;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  border: 1.5px solid transparent;
+  display: flex; flex-direction: column; gap: 7px;
+  position: relative;
+  transition: box-shadow 0.15s;
+  align-self: stretch;
+  min-height: 180px;
+}
+.wf-card:hover { box-shadow: var(--shadow-md); }
+
+/* 颜色变体 */
+.mod-green  { border-color: #a7f3d0; }
+.mod-purple { border-color: #c4b5fd; }
+.mod-blue   { border-color: #93c5fd; }
+.mod-teal   { border-color: #67e8f9; }
+.mod-orange { border-color: #fcd34d; }
+.mod-gray   { border-color: var(--gray-mid); background: #f9fafb; }
+.mod-collab { border: 1.5px dashed #93c5fd; background: #f8fbff; }
+
+/* ══ Step 徽章 — 数字突出卡片外 ══ */
+.wf-card { overflow: visible; }
+.step-badge {
+  display: inline-flex; align-items: center; gap: 0;
+  align-self: flex-start;
+  position: relative;
+  margin-top: -22px;
+  margin-left: -4px;
+  white-space: nowrap;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+.step-num {
+  font-size: 13px; font-weight: 900;
+  width: 28px; height: 28px;
+  border-radius: 8px 0 0 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-label {
+  font-size: 9px; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 8px; height: 28px;
+  display: flex; align-items: center;
+  border-radius: 0 8px 8px 0;
+}
+.mod-green  .step-num   { background: #059669; color: #fff; }
+.mod-green  .step-label { background: #d1fae5; color: #065f46; }
+.mod-purple .step-num   { background: #7c3aed; color: #fff; }
+.mod-purple .step-label { background: #ede9fe; color: #4c1d95; }
+.mod-blue   .step-num   { background: #2563eb; color: #fff; }
+.mod-blue   .step-label { background: #dbeafe; color: #1e3a8a; }
+.mod-teal   .step-num   { background: #0891b2; color: #fff; }
+.mod-teal   .step-label { background: #cffafe; color: #164e63; }
+.mod-orange .step-num   { background: #d97706; color: #fff; }
+.mod-orange .step-label { background: #fef3c7; color: #92400e; }
+.mod-gray   .step-num   { background: #6b7280; color: #fff; }
+.mod-gray   .step-label { background: #f3f4f6; color: #374151; }
+.mod-collab .step-num   { background: #2563eb; color: #fff; }
+.mod-collab .step-label { background: #dbeafe; color: #1e40af; }
+.mod-dim {
+  border: 1.5px dashed #d1d5db !important;
+  background: #fafafa !important;
+  opacity: 0.75;
+}
+.mod-dim .step-num   { background: #9ca3af; color: #fff; }
+.mod-dim .step-label { background: #f3f4f6; color: #6b7280; }
+
+/* 模块标签 */
+.card-module-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; padding: 2px 7px;
+  border-radius: 8px; align-self: flex-start;
+}
+.card-module-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag-green  { background: var(--green-light);  color: var(--green-dark); }
+.tag-purple { background: var(--purple-light); color: var(--purple-dark); }
+.tag-blue   { background: var(--blue-light);   color: var(--blue-dark); }
+.tag-teal   { background: var(--teal-light);   color: var(--teal-dark); }
+.tag-orange { background: var(--orange-light); color: var(--orange-dark); }
+.tag-gray   { background: var(--gray-light);   color: #4b5563; }
+.tag-collab { background: #dbeafe; color: #1e40af; }
+
+/* 卡片标题 */
+.card-title {
+  font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3;
+}
+
+/* 状态标签 */
+.card-status {
+  display: inline-flex; align-items: center;
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 8px; align-self: flex-start;
+}
+.st-green  { background: var(--green-light);  color: var(--green-dark); }
+.st-yellow { background: #fef9c3; color: #713f12; }
+.st-orange { background: var(--orange-light); color: var(--orange-dark); }
+.st-blue   { background: var(--blue-light);   color: var(--blue-dark); }
+.st-teal   { background: var(--teal-light);   color: var(--teal-dark); }
+.st-gray   { background: var(--gray-light);   color: #6b7280; }
+.st-collab { background: #dbeafe; color: #1e40af; }
+
+/* 小节标签 */
+.card-section-label {
+  font-size: 9px; font-weight: 700; color: #9ca3af;
+  letter-spacing: 0.8px; text-transform: uppercase;
+}
+
+/* 描述 */
+.card-desc {
+  font-size: 11px; color: var(--text-sub); line-height: 1.65;
+  flex: 1; /* 撑开剩余空间，让卡片底部对齐 */
+  min-height: 0;
+}
+
+/* 能力标签 */
+.card-caps { display: flex; flex-wrap: wrap; gap: 4px; }
+.cap-tag {
+  font-size: 10px; font-weight: 600; padding: 2px 7px;
+  border-radius: 7px; white-space: nowrap;
+}
+.cap-live  { background: #d1fae5; color: #065f46; }
+.cap-soon  { background: #fef9c3; color: #92400e; }
+.cap-plan  { background: #ede9fe; color: #4c1d95; }
+.cap-train { background: #ffedd5; color: #9a3412; }
+.cap-collab{ background: #dbeafe; color: #1e40af; }
+
+/* 数据指标 */
+.card-metrics { display: flex; gap: 5px; flex-wrap: wrap; }
+.metric-chip {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 7px; background: #f3f4f6; color: #374151; white-space: nowrap;
+}
+
+/* 卡片内分隔线（投流合并用） */
+.card-divider {
+  height: 1px; background: var(--gray-mid); margin: 4px 0;
+}
+.card-sub-label {
+  font-size: 9px; font-weight: 700; color: #9ca3af;
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;
+}
+
+/* 达人库聚合框已废弃，保留空定义避免报错 */
+.cluster-wrap, .cluster-label, .cluster-dot, .cluster-text,
+.cluster-inner, .cluster-sep { display: none; }
+
+/* ══ 阶段分隔线 ══ */
+.phase-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gray-mid) 20%, var(--gray-mid) 80%, transparent);
+  margin: 4px 0;
+}
+
+/* ══ 闭环横幅 ══ */
+.loop-banner {
+  margin: 24px 0 8px;
+  display: flex; align-items: center; gap: 0;
+}
+.loop-line {
+  flex: 1; height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3));
+}
+.loop-line.r {
+  background: linear-gradient(90deg, rgba(139,92,246,0.3), transparent);
+}
+.loop-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #1e1b4b, #4c1d95);
+  color: white; border-radius: 24px;
+  font-size: 11px; font-weight: 700; white-space: nowrap;
+  box-shadow: 0 3px 14px rgba(76,29,149,0.3);
+}
+.loop-sub {
+  text-align: center; font-size: 10px; color: #9ca3af; margin-top: 5px;
+}
+
+/* ══ 产品模块总览 ══ */
+.modules-section {
+  margin-top: 32px; padding-top: 28px;
+  border-top: 1.5px solid var(--gray-mid);
+}
+.modules-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; font-weight: 800; margin-bottom: 16px;
+}
+.modules-title-bar {
+  width: 4px; height: 18px;
+  background: linear-gradient(180deg, #4f46e5, #8b5cf6);
+  border-radius: 2px; flex-shrink: 0;
+}
+.modules-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+.mod-card {
+  background: var(--white); border-radius: 14px; padding: 18px;
+  box-shadow: var(--shadow); border-top: 3px solid transparent;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mod-card.green  { border-top-color: var(--green); }
+.mod-card.purple { border-top-color: var(--purple); }
+.mod-card.orange { border-top-color: var(--orange); }
+.mod-card.blue   { border-top-color: var(--blue); }
+
+.mod-card-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.mod-card-name { font-size: 14px; font-weight: 800; }
+.mod-card-name.green  { color: var(--green-dark); }
+.mod-card-name.purple { color: var(--purple-dark); }
+.mod-card-name.orange { color: var(--orange-dark); }
+.mod-card-name.blue   { color: var(--blue-dark); }
+
+.mod-status {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 8px; white-space: nowrap;
+}
+.ms-green  { background: var(--green-light);  color: var(--green-dark); }
+.ms-yellow { background: #fef9c3; color: #713f12; }
+.ms-orange { background: var(--orange-light); color: var(--orange-dark); }
+.ms-blue   { background: var(--blue-light);   color: var(--blue-dark); }
+
+.mod-pillars { display: flex; flex-direction: column; gap: 6px; }
+.mod-pillar {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: 11px; color: var(--text-sub); line-height: 1.55;
+}
+.mod-pillar-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 5px;
+}
+.mod-pillar-dot.green  { background: var(--green); }
+.mod-pillar-dot.purple { background: var(--purple); }
+.mod-pillar-dot.orange { background: var(--orange); }
+.mod-pillar-dot.blue   { background: var(--blue); }
+.mod-pillar-dot.teal   { background: var(--teal); }
+
+.mod-caps {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  padding-top: 6px; border-top: 1px solid var(--gray-light);
+}
+.mod-card-desc {
+  font-size: 11px; color: var(--text-sub); line-height: 1.65;
+}
+
+/* ══ Footer ══ */
+.footer {
+  text-align: center; padding: 20px;
+  font-size: 11px; color: #9ca3af;
+}
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="nav">
+  <div class="nav-brand">市场部｜内容营销中心 · <strong>产品化体系进度</strong> · 2026 Q1–Q2</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#pre">投前准备</a>
+    <a class="nav-link" href="#exec">投放执行</a>
+    <a class="nav-link" href="#recap">复盘沉淀</a>
+    <a class="nav-link" href="#modules">产品模块总览</a>
+  </div>
+</nav>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-top">
+    <span class="header-eyebrow">市场部 | 内容营销中心</span>
+    <div class="header-title">内容营销产品化体系进度</div>
+  </div>
+  <div class="header-infobar">
+    <!-- 基础能力 -->
+    <div class="infobar-section">
+      <span class="infobar-label">基础能力</span>
+      <div class="cap-chips">
+        <div class="cap-chip cc-green">
+          <span class="cap-chip-num">1</span>
+          <span class="cap-chip-name">内容库</span>
+          <span class="cap-chip-status">内容营销70%项目使用中</span>
+        </div>
+        <div class="cap-chip cc-yellow">
+          <span class="cap-chip-num">2</span>
+          <span class="cap-chip-name">达人库</span>
+          <span class="cap-chip-status">4月下旬</span>
+        </div>
+        <div class="cap-chip cc-blue">
+          <span class="cap-chip-num">3</span>
+          <span class="cap-chip-name">灵感榜单 + 竞品库</span>
+          <span class="cap-chip-status">需求待落定</span>
+        </div>
+      </div>
+    </div>
+    <!-- 分隔线 -->
+    <div class="infobar-divider"></div>
+    <!-- AI 能力 -->
+    <div class="infobar-section">
+      <span class="infobar-label">AI 能力</span>
+      <div class="ai-pills">
+        <div class="ai-pill">
+          <div class="ai-pill-dot" style="background:#a78bfa;"></div>
+          <span class="ai-pill-name">AI 选号</span>
+          <span class="ai-pill-state">实验中</span>
+        </div>
+        <div class="ai-pill">
+          <div class="ai-pill-dot" style="background:#fbbf24;"></div>
+          <span class="ai-pill-name">舆情 AI</span>
+          <span class="ai-pill-state">样板间建设中</span>
+        </div>
+        <div class="ai-pill">
+          <div class="ai-pill-dot" style="background:#34d399;"></div>
+          <span class="ai-pill-name">AI 写手</span>
+          <span class="ai-pill-state">训练中</span>
+        </div>
+        <div class="ai-pill">
+          <div class="ai-pill-dot" style="background:#93c5fd;"></div>
+          <span class="ai-pill-name">AI 审稿</span>
+          <span class="ai-pill-state">规划中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 主体 -->
+<div class="main">
+
+  <!-- ══ 投前准备 ══ -->
+  <div class="phase-section" id="pre">
+    <div class="phase-header">
+      <div class="phase-badge pre">01 · 投前准备</div>
+      <div class="phase-flow">
+        <span>业务需求对齐</span><span class="pf-sep"> › </span>
+        <span>营销洞察</span><span class="pf-sep"> › </span>
+        <span>项目策略制定</span>
+      </div>
+    </div>
+
+    <!-- 上行：Step 1–3 -->
+    <div class="flow-row pre-row-top">
+
+      <!-- Step 1 -->
+      <div class="wf-card mod-gray">
+        <div class="step-badge"><span class="step-num">1</span><span class="step-label">Step</span></div>
+        <div class="card-title">业务需求对齐</div>
+        <div class="card-section-label">现有作业方式</div>
+        <div class="card-desc">需求接收与评估、口径及目标确认</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 2 -->
+      <div class="wf-card mod-blue">
+        <div class="step-badge"><span class="step-num">2</span><span class="step-label">Step</span></div>
+        <div class="card-module-row">
+          <span class="card-module-tag tag-blue">竞品库</span>
+          <span class="card-module-tag tag-teal">灵感榜单</span>
+        </div>
+        <div class="card-title">营销洞察</div>
+        <div class="card-status st-blue">需求待落定</div>
+        <div class="card-desc">竞品库：友商真实投放素材分渠道结构化呈现，紧跟热点爆款；灵感榜单：对投放素材多维度排序，优质内容拆解复用，AI 生产语料库</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 3 -->
+      <div class="wf-card mod-dim">
+        <div class="step-badge"><span class="step-num">3</span><span class="step-label">Step</span></div>
+        <div class="card-title">项目策略制定</div>
+        <div class="card-section-label">现有作业方式 + 部分能力支持</div>
+        <div class="card-desc">内容策略、达人策略、渠道预算分配</div>
+        <div class="card-divider"></div>
+        <div class="card-sub-label">内容库 · 已有能力</div>
+        <div class="card-desc" style="flex:0 0 auto;"><span class="cap-tag" style="background:#d1fae5;color:#065f46;border:1px solid #a7f3d0;font-size:10px;padding:1px 7px;">内容库</span> 具备辅助功能</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="phase-divider"></div>
+
+  <!-- ══ 投放执行 ══ -->
+  <div class="phase-section" id="exec">
+    <div class="phase-header">
+      <div class="phase-badge exec">02 · 投放执行</div>
+      <div class="phase-flow">
+        <span>达人筛选</span><span class="pf-sep"> › </span>
+        <span>建联沟通及下单确认</span><span class="pf-sep"> › </span>
+        <span>内容审核</span><span class="pf-sep"> › </span>
+        <span>内容发布回填</span><span class="pf-sep"> › </span>
+        <span>投流优化</span>
+      </div>
+    </div>
+
+    <!-- Step 4+5 达人筛选/建联 — 嵌套大卡 -->
+    <div class="flow-row exec-top">
+      <div class="exec-dual-card">
+        <div class="exec-dual-header">
+          <span class="card-module-tag tag-purple" style="margin:0;">达人库</span>
+          <span class="exec-dual-title">账号初筛至下单全流程</span>
+          <span class="card-status st-yellow" style="margin-left:auto;">4月下旬上线</span>
+        </div>
+        <div class="exec-dual-body">
+
+          <!-- 子卡 Step 4 -->
+          <div class="exec-sub-card">
+            <div class="step-badge"><span class="step-num">4</span><span class="step-label">Step</span></div>
+            <div class="exec-sub-title">达人筛选</div>
+            <div class="exec-sub-desc"><strong>运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</div>
+            <div class="exec-sub-desc"><strong>数据整合展示</strong>：媒体及三方信息、历史合作数据</div>
+            <div class="exec-sub-desc"><strong>策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</div>
+            <div class="exec-sub-caps">
+              <span class="cap-tag cap-soon">AI选号 · 实验中</span>
+              <span class="cap-tag cap-soon" style="background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd;">团购易生活项目</span>
+            </div>
+          </div>
+
+          <div class="exec-sub-arrow"></div>
+
+          <!-- 子卡 Step 5 -->
+          <div class="exec-sub-card">
+            <div class="step-badge"><span class="step-num">5</span><span class="step-label">Step</span></div>
+            <div class="exec-sub-title">建联沟通及下单确认</div>
+            <div class="exec-sub-desc">对达人账号进行二次筛选（调性/创意/配合度），锁定档期与报价，并完成下单最终确认&amp;合规审核</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6-8 内容执行 -->
+    <div class="flow-row exec-row">
+
+      <!-- Step 6 -->
+      <div class="wf-card mod-green">
+        <div class="card-corner-status ccs-green">已上线</div>
+        <div class="step-badge"><span class="step-num">6</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-green">内容库</div>
+        <div class="card-title">内容审核</div>
+        <div class="card-status st-green">内容营销 70% 项目使用中</div>
+        <div class="card-desc"><strong>运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</div>
+        <div class="card-desc"><strong>全流程合规管控</strong>：审核留痕、机审拦截</div>
+        <div class="card-caps">
+          <span class="cap-tag cap-plan">AI审稿 · 规划中</span>
+          <span class="cap-tag cap-train">AI写手 · 训练中</span>
+        </div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 7 -->
+      <div class="wf-card mod-green">
+        <div class="card-corner-status ccs-green">已上线</div>
+        <div class="step-badge"><span class="step-num">7</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-green">内容库</div>
+        <div class="card-title">内容发布回填</div>
+        <div class="card-status st-green">内容营销 70% 项目使用中</div>
+        <div class="card-desc"><strong>内容资产沉淀</strong>：营销素材入库归档</div>
+        <div class="card-desc">发布后数据回填及实际结算金额录入，为项目复盘提供完整数据支撑</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 8 投流优化 -->
+      <div class="wf-card mod-collab">
+        <div class="step-badge"><span class="step-num">8</span><span class="step-label">Step</span></div>
+        <div class="card-title">投流优化</div>
+        <div class="card-sub-label">增长投放团队 · 广告投放产品</div>
+        <div class="card-desc" style="flex:0 0 auto;">oCPX / RTA 能力优化、实时出价模型优化</div>
+        <div class="card-caps">
+          <span class="cap-tag cap-collab">增长侧建设中</span>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-sub-label">内容营销团队</div>
+        <div class="card-desc" style="flex:1;">指标设计、参数配置、实时返数监测、供应商管理等</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-divider"></div>
+
+  <!-- ══ 复盘沉淀 ══ -->
+  <div class="phase-section" id="recap">
+    <div class="phase-header">
+      <div class="phase-badge recap">03 · 复盘沉淀</div>
+      <div class="phase-flow">
+        <span>内容资产沉淀</span><span class="pf-sep"> › </span>
+        <span>达人数据沉淀</span><span class="pf-sep"> › </span>
+        <span>营销洞察反哺</span><span class="pf-sep"> › </span>
+        <span>舆情/心智评估</span>
+      </div>
+    </div>
+
+    <div class="flow-row recap-row">
+
+      <!-- Step 9 -->
+      <div class="wf-card mod-green">
+        <div class="step-badge"><span class="step-num">9</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-green">内容库</div>
+        <div class="card-title">内容资产沉淀</div>
+        <div class="card-status st-green">部分上线</div>
+        <div class="card-desc">营销素材入库归档，分项目结构化存档，二期规划完整标签体系</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 10 -->
+      <div class="wf-card mod-purple">
+        <div class="step-badge"><span class="step-num">10</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-purple">达人库</div>
+        <div class="card-title">达人数据沉淀</div>
+        <div class="card-status st-yellow">4月下旬上线</div>
+        <div class="card-desc">历史合作数据沉淀与展示，运营经验持续输入 AI 选号能力，辅助下一轮达人决策</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 11 -->
+      <div class="wf-card mod-teal">
+        <div class="step-badge"><span class="step-num">11</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-teal">灵感榜单</div>
+        <div class="card-title">营销洞察反哺</div>
+        <div class="card-status st-teal">需求待落定</div>
+        <div class="card-desc">沉淀优质素材，通过排行榜鼓励创意复用，反哺下一轮投前洞察与 AI 生产语料</div>
+      </div>
+
+      <div class="flow-arrow"></div>
+
+      <!-- Step 12 -->
+      <div class="wf-card mod-orange">
+        <div class="step-badge"><span class="step-num">12</span><span class="step-label">Step</span></div>
+        <div class="card-module-tag tag-orange">舆情AI</div>
+        <div class="card-title">舆情/心智评估</div>
+        <div class="card-status st-orange">样板间建设中</div>
+        <div class="card-desc">通过 AI 识别噪音与真实反馈，辅助业务识别用户情感变化和真实需求</div>
+        <div class="card-caps">
+          <span class="cap-tag cap-soon">问小团 · 进行中</span>
+          <span class="cap-tag cap-soon">拼好饭 · 进行中</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 闭环横幅 -->
+  <div class="loop-banner">
+    <div class="loop-line"></div>
+    <div class="loop-pill">↺ &nbsp;复盘数据反哺投前 · 形成产品化闭环</div>
+    <div class="loop-line r"></div>
+  </div>
+  <div class="loop-sub">灵感榜单 · 达人库历史数据 · 舆情AI洞察 → 持续反哺营销策略与下一轮投前决策</div>
+
+  <!-- ══ 产品模块总览 ══ -->
+  <div class="modules-section" id="modules">
+    <div class="modules-title">
+      <div class="modules-title-bar"></div>
+      产品模块总览
+    </div>
+    <div class="modules-grid">
+
+      <div class="mod-card green">
+        <div class="mod-card-header">
+          <div class="mod-card-name green">内容库</div>
+          <div class="mod-status ms-green">已上线</div>
+        </div>
+        <div class="mod-pillars">
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>全流程合规管控</strong>：审核留痕、机审拦截</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>内容资产沉淀</strong>：营销素材入库归档</span></div>
+        </div>
+        <div class="mod-caps">
+          <span class="cap-tag cap-plan">AI审稿 · 规划中</span>
+          <span class="cap-tag cap-train">AI写手 · 训练中</span>
+        </div>
+      </div>
+
+      <div class="mod-card purple">
+        <div class="mod-card-header">
+          <div class="mod-card-name purple">达人库</div>
+          <div class="mod-status ms-yellow">4月下旬上线</div>
+        </div>
+        <div class="mod-pillars">
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>数据整合展示</strong>：媒体及三方信息、历史合作数据</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</span></div>
+        </div>
+        <div class="mod-caps">
+          <span class="cap-tag cap-soon">AI选号 · 实验中</span>
+          <span class="cap-tag cap-soon" style="background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd;">团购易生活项目</span>
+        </div>
+      </div>
+
+      <div class="mod-card orange">
+        <div class="mod-card-header">
+          <div class="mod-card-name orange">舆情AI</div>
+          <div class="mod-status ms-orange">样板间建设中</div>
+        </div>
+        <div class="mod-card-desc">通过 AI 识别噪音与真实反馈，辅助业务识别用户情感变化和真实需求。</div>
+        <div class="mod-pillars">
+          <div class="mod-pillar"><div class="mod-pillar-dot orange"></div><span>评论区自动化打标</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot orange"></div><span>UGC 情感倾向分析</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot orange"></div><span>真实反馈 vs 噪音识别</span></div>
+        </div>
+        <div class="mod-caps">
+          <span class="cap-tag cap-soon">问小团 · 进行中</span>
+          <span class="cap-tag cap-soon">拼好饭 · 进行中</span>
+        </div>
+      </div>
+
+      <div class="mod-card blue">
+        <div class="mod-card-header">
+          <div class="mod-card-name blue" style="font-size:13px;">竞品库 + 灵感榜单</div>
+          <div class="mod-status ms-blue">需求待落定</div>
+        </div>
+        <div class="mod-pillars">
+          <div class="mod-pillar"><div class="mod-pillar-dot blue"></div><span><strong>竞品库</strong>：友商素材分渠道结构化归档，热点爆款追踪，有效植入形式沉淀</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot teal"></div><span><strong>灵感榜单</strong>：素材多维度排序，优质内容复用二创，AI 生产语料库</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">内容营销产品化体系进度 · 市场部｜内容营销中心 · 2026年4月</div>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
