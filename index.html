@@ -3,638 +3,738 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1440, initial-scale=1">
-<title>内容营销产品化体系进度</title>
+<title>内容营销运营系统建设进度</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --green:        #10b981;
-  --green-light:  #d1fae5;
-  --green-dark:   #065f46;
-  --purple:       #8b5cf6;
-  --purple-light: #ede9fe;
-  --purple-dark:  #4c1d95;
-  --blue:         #3b82f6;
-  --blue-light:   #dbeafe;
-  --blue-dark:    #1e3a8a;
-  --orange:       #f59e0b;
-  --orange-light: #fef3c7;
-  --orange-dark:  #92400e;
-  --teal:         #0891b2;
-  --teal-light:   #cffafe;
-  --teal-dark:    #164e63;
-  --gray-light:   #f3f4f6;
-  --gray-mid:     #e5e7eb;
-  --bg:           #eef0f5;
-  --text:         #111827;
-  --text-sub:     #6b7280;
-  --white:        #ffffff;
-  --radius:       12px;
-  --shadow:       0 1px 4px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:    0 4px 14px rgba(0,0,0,0.09);
+@keyframes sweep {
+  0%   { left: -60%; }
+  100% { left: 120%; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes flow-dot {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: hidden; }
-body {
-font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
-background: var(--bg);
-color: var(--text);
-min-height: 100vh;
-overflow-x: hidden;
-margin: 0; padding: 0;
+/* ══ 整页底色 ══ */
+html, body {
+  min-height: 100vh;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  background: #0e1225;
+  color: #c8d0e8;
+  overflow-x: hidden;
 }
 
 /* ══ 导航 ══ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(255,255,255,0.96);
+  height: 48px;
+  background: rgba(10,14,32,0.92);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--gray-mid);
-  display: flex; align-items: center;
-  padding: 0 32px; height: 48px;
+  border-bottom: 1px solid rgba(99,102,241,0.18);
+  display: flex; align-items: center; padding: 0 32px;
 }
 .nav-brand {
-  font-size: 12px; font-weight: 600; color: var(--text-sub);
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 2.5px; font-weight: 400;
+  color: rgba(165,180,252,0.4);
   margin-right: auto; white-space: nowrap;
 }
-.nav-brand strong { color: var(--text); font-weight: 700; }
+.nav-brand strong { color: rgba(165,180,252,0.85); font-weight: 700; }
 .nav-links { display: flex; gap: 4px; }
 .nav-link {
-  font-size: 12px; font-weight: 500; color: var(--text-sub);
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 1.5px;
+  color: rgba(165,180,252,0.35);
   text-decoration: none; padding: 5px 14px; border-radius: 20px;
   transition: all 0.15s; white-space: nowrap;
 }
-.nav-link:hover { color: var(--text); background: var(--gray-light); }
+.nav-link:hover { color: rgba(165,180,252,0.85); background: rgba(99,102,241,0.12); }
 
-/* ══ Header ══ */
+/* ══ Header — 科幻感靠结构，不靠渐变 ══ */
 .header {
   margin-top: 48px;
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #4c1d95 100%);
-  padding: 20px 32px 20px; color: white;
-  position: relative; overflow: hidden;
+  background: #0a0e20;
+  padding: 28px 32px 22px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(99,102,241,0.15);
 }
-.header::before {
-  content: ''; position: absolute; top: -60px; right: -40px;
-  width: 220px; height: 220px; border-radius: 50%;
-  background: rgba(255,255,255,0.04); pointer-events: none;
+/* 网格纹 */
+.header-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
-/* 标题行 */
-.header-top {
-  display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px;
+/* 顶部发光线 */
+.header-topline {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(99,102,241,0.5) 20%,
+    rgba(139,92,246,1) 50%,
+    rgba(99,102,241,0.5) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 16px rgba(139,92,246,0.6), 0 0 32px rgba(99,102,241,0.3);
 }
+/* 扫光 */
+.header-sweep {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.header-sweep::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 50%;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.03), transparent);
+  animation: sweep 7s ease-in-out infinite;
+  left: -50%;
+}
+/* 右侧光晕 */
+.header-glow {
+  position: absolute; top: -100px; right: -80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* 底部流动线 */
+.header-bottomline {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(99,102,241,0.2) 20%,
+    rgba(99,102,241,0.35) 50%,
+    rgba(99,102,241,0.2) 80%,
+    transparent 100%
+  );
+  overflow: hidden;
+}
+.header-bottomline::after {
+  content: '';
+  position: absolute; top: -1px; width: 60px; height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.9), transparent);
+  animation: flow-dot 4s ease-in-out infinite;
+  border-radius: 2px;
+}
+.header-content { position: relative; z-index: 2; }
 .header-eyebrow {
-  font-size: 11px; font-weight: 500; opacity: 0.45;
-  letter-spacing: 1.5px;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 3px; font-weight: 400;
+  color: rgba(165,180,252,0.35);
+  margin-bottom: 8px;
+}
+.header-eyebrow::after {
+  content: '█';
+  font-size: 8px; margin-left: 4px;
+  animation: blink 1.2s step-end infinite;
+  opacity: 0.5;
 }
 .header-title {
-  font-size: 22px; font-weight: 800; letter-spacing: -0.3px; line-height: 1;
+  font-size: 26px; font-weight: 800; letter-spacing: 1px;
+  background: linear-gradient(180deg,
+    #ffffff 0%, #e8ecf8 15%, #c8d0e8 30%,
+    #f0f4ff 45%, #d0d8f0 60%, #b8c4e0 75%,
+    #e4e8f8 90%, #ffffff 100%
+  );
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)) drop-shadow(0 0 8px rgba(180,190,220,0.25));
+  margin-bottom: 16px;
 }
-/* 信息条：基础能力 + AI 能力横排一行 */
+
+/* infobar */
 .header-infobar {
-  display: flex; align-items: stretch; gap: 0;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  overflow: visible;
+  display: flex; align-items: center; gap: 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 10px;
   width: fit-content;
-  max-width: 100%;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 16px rgba(99,102,241,0.08);
 }
 .infobar-section {
   display: flex; align-items: center; gap: 8px;
-  padding: 9px 16px;
+  padding: 10px 18px;
   flex-shrink: 0;
 }
 .infobar-section + .infobar-section {
-  border-left: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(99,102,241,0.15);
 }
 .infobar-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; opacity: 0.4;
-  white-space: nowrap; flex-shrink: 0;
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 1.5px; font-weight: 700;
+  color: rgba(165,180,252,0.3); white-space: nowrap;
 }
 .infobar-divider {
-  width: 1px; height: 28px; background: rgba(255,255,255,0.1); flex-shrink: 0;
+  width: 1px; height: 28px;
+  background: linear-gradient(180deg, transparent, rgba(99,102,241,0.3), transparent);
+  flex-shrink: 0;
 }
-/* 基础能力小标签 */
+
+/* 基础能力 chips */
 .cap-chips { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
 .cap-chip {
   display: flex; align-items: center; gap: 5px;
   padding: 4px 10px; border-radius: 20px;
   font-size: 11px; font-weight: 600; white-space: nowrap;
 }
-.cap-chip-num {
-  font-size: 10px; font-weight: 800; opacity: 0.7;
-}
+.cap-chip-num  { font-size: 10px; font-weight: 800; opacity: 0.7; }
 .cap-chip-name { font-weight: 700; }
-.cap-chip-status {
-  font-size: 9px; font-weight: 600; opacity: 0.75;
-}
-.cc-green  { background: rgba(16,185,129,0.2);  color: #6ee7b7; }
-.cc-yellow { background: rgba(245,158,11,0.2);  color: #fcd34d; }
-.cc-blue   { background: rgba(59,130,246,0.2);  color: #93c5fd; }
-/* AI 能力 pills */
+.cap-chip-status { font-size: 9px; font-weight: 600; opacity: 0.75; }
+.cc-green  { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+.cc-yellow { background: rgba(245,158,11,0.15);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.25); }
+.cc-orange { background: rgba(217,119,6,0.15);   color: #fbbf24; border: 1px solid rgba(217,119,6,0.25); }
+.cc-blue   { background: rgba(59,130,246,0.15);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
+
+/* AI pills */
 .ai-pills { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 .ai-pill {
   display: flex; align-items: center; gap: 4px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px; padding: 3px 10px;
   white-space: nowrap;
 }
-.ai-pill-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-.ai-pill-name { font-size: 11px; font-weight: 700; }
-.ai-pill-state { font-size: 9px; opacity: 0.55; }
-/* 废弃旧样式 */
-.header-panels, .header-panel, .panel-label,
-.cap-list, .cap-row, .cap-num, .cap-info, .cap-name, .cap-meta,
-.cap-status, .cs-green, .cs-yellow, .cs-blue, .cap-note,
-.ai-tags-row { display: none; }
+.ai-pill-dot   { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.ai-pill-name  { font-size: 11px; font-weight: 700; color: rgba(220,228,255,0.85); }
+.ai-pill-state { font-size: 9px; color: rgba(165,180,252,0.45); }
 
 /* ══ 主体 ══ */
 .main {
-  width: 100%; max-width: min(1060px, 100vw); margin: 0 auto;
-  padding: 28px 16px 48px;
-  box-sizing: border-box;
+  max-width: 1060px; margin: 0 auto;
+  padding: 20px 24px 48px;
 }
 
-/* ══ 阶段布局 ══ */
-.phase-section {
-  margin-bottom: 20px;
-  padding: 24px 2px 0;
-}
-
-/* 阶段标题行 */
+/* 阶段标题 */
+.phase-section { margin-bottom: 0; padding: 24px 0 0; }
 .phase-header {
   display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
 }
 .phase-badge {
-  font-size: 12px; font-weight: 800; padding: 5px 16px;
-  border-radius: 20px; letter-spacing: 0.3px; white-space: nowrap;
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  padding: 5px 16px; border-radius: 20px; white-space: nowrap;
 }
-.phase-badge.pre   { background: var(--purple-light); color: var(--purple-dark); }
-.phase-badge.exec  { background: var(--green-light);  color: var(--green-dark); }
-.phase-badge.recap { background: var(--orange-light); color: var(--orange-dark); }
+.phase-badge.pre    { background: rgba(139,92,246,0.12); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); box-shadow: 0 0 10px rgba(139,92,246,0.15); }
+.phase-badge.exec   { background: rgba(16,185,129,0.12);  color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3);  box-shadow: 0 0 10px rgba(16,185,129,0.15); }
+.phase-badge.recap  { background: rgba(245,158,11,0.12);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.3);  box-shadow: 0 0 10px rgba(245,158,11,0.15); }
 .phase-flow {
-  font-size: 11px; color: var(--text-sub);
+  font-size: 11px; color: rgba(165,180,252,0.45);
   display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
 }
-.pf-sep { color: #d1d5db; }
+.pf-sep { color: rgba(139,92,246,0.5); }
 
-/* ══ 流程行 — 核心：等高 ══ */
+/* 分隔线 */
+.phase-divider {
+  height: 1px; margin: 20px 0 0;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.25) 20%, rgba(139,92,246,0.35) 50%, rgba(99,102,241,0.25) 80%, transparent);
+  box-shadow: 0 0 6px rgba(139,92,246,0.1);
+}
+
+/* ══ 流程行 ══ */
 .flow-row {
   display: grid;
-  grid-template-columns: 1fr 16px 1fr 16px 1fr 16px 1fr;
-  align-items: stretch;
-  gap: 0;
-  width: 100%;
+  grid-template-columns: 1fr 16px 1fr 16px 1fr;
+  align-items: stretch; gap: 0;
 }
-/* 投前准备上行：3列 */
-.flow-row.pre-row-top {
-  grid-template-columns: 1fr 20px 1fr 20px 1fr;
-}
-/* 投前准备下行：2列（居中） */
-.flow-row.pre-row-bottom {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin-top: 8px;
-}
-.flow-row.pre-row-bottom .wf-card {
-  width: calc(33.33% - 10px);
-  flex: none;
-}
-/* 投放执行达人行：整行大卡嵌套 */
-.flow-row.exec-top {
-  display: block;
-  margin-bottom: 10px;
-}
-/* 大容器卡片 */
-.exec-dual-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1.5px solid #c4b5fd;
-  box-shadow: var(--shadow);
-  padding: 18px 20px 16px;
-  position: relative;
-  overflow: visible;
-}
-/* 大卡顶部：模块标签 + 状态 */
-.exec-dual-header {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 14px;
-}
-.exec-dual-title {
-  font-size: 11px; font-weight: 700; color: #7c3aed;
-  letter-spacing: 0.3px;
-}
-/* 内部两列子卡 */
-.exec-dual-body {
-  display: grid;
-  grid-template-columns: 1fr 32px 1fr;
-  align-items: start;
-  gap: 0;
-}
-/* 子卡 */
-.exec-sub-card {
-  background: #faf5ff;
-  border-radius: 10px;
-  border: 1px solid #ede9fe;
-  padding: 12px 14px;
-  display: flex; flex-direction: column; gap: 6px;
-  position: relative;
-  overflow: visible;
-}
-/* 子卡内箭头 */
-.exec-sub-arrow {
-  display: flex; align-items: center; justify-content: center;
-  color: #c4b5fd; font-size: 22px; line-height: 1;
-  padding-top: 8px;
-}
-.exec-sub-arrow::after { content: '›'; }
-/* 子卡 step badge */
-.exec-sub-card .step-badge {
-  margin-top: -20px;
-  margin-left: -2px;
-}
-.exec-sub-card .step-num  { background: #7c3aed; color: #fff; width:24px; height:24px; font-size:12px; border-radius:6px 0 0 6px; }
-.exec-sub-card .step-label{ background: #ede9fe; color: #4c1d95; font-size:8px; height:24px; border-radius:0 6px 6px 0; }
-.exec-sub-title { font-size: 15px; font-weight: 700; color: var(--text); }
-.exec-sub-status { display: inline-flex; align-items: center; }
-.exec-sub-desc { font-size: 12px; color: var(--text-sub); line-height: 1.55; }
-.exec-sub-caps { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.flow-row.pre-row-top  { grid-template-columns: 1fr 20px 1fr 20px 1fr; }
+.flow-row.exec-row     { grid-template-columns: 1fr 14px 1fr 14px 1fr; }
+.flow-row.recap-row    { grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr; }
+.flow-row.exec-top     { display: block; margin-bottom: 10px; }
 
-/* 卡片右上角状态标签 */
-.card-corner-status {
-  position: absolute;
-  top: 12px; right: 14px;
-  font-size: 11px; font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
-}
-.ccs-green { background: #d1fae5; color: #065f46; }
-/* 投放执行内容行：3列 */
-.flow-row.exec-row {
-  grid-template-columns: 1fr 14px 1fr 14px 1fr;
-}
-/* 复盘沉淀行：4列 */
-.flow-row.recap-row {
-  grid-template-columns: 1fr 12px 1fr 12px 1fr 12px 1fr;
-}
-.flow-row.recap-row .wf-card {
-  min-height: 160px;
-  padding: 11px 11px;
-}
-.flow-row.recap-row .card-title {
-  font-size: 14px;
-}
-.flow-row.recap-row .card-desc {
-  font-size: 11px;
-  line-height: 1.5;
-}
-.flow-row.recap-row .card-status {
-  font-size: 10px;
-}
-
-/* 投前准备连接箭头（向下） */
-.pre-down-arrow {
-  display: flex; align-items: center; justify-content: center;
-  height: 24px; color: #d1d5db; font-size: 16px;
-  margin: 2px 0;
-}
-
-/* 箭头 */
 .flow-arrow {
-  width: 16px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  color: #c4b5fd; font-size: 20px; line-height: 1;
+  color: rgba(139,92,246,0.5); font-size: 20px;
 }
 .flow-arrow::after { content: '›'; }
 
-/* ══ 卡片基础 ══ */
+/* ══ 卡片 ══ */
 .wf-card {
-  min-width: 0;
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  box-shadow: var(--shadow);
-  border: 1.5px solid transparent;
+  background: rgba(255,255,255,0.065);
+  border: 1px solid rgba(99,102,241,0.18);
+  border-radius: 12px;
+  padding: 18px 16px 14px 20px;
+  position: relative;
+  overflow: visible;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
   display: flex; flex-direction: column; gap: 7px;
-  position: relative;
-  transition: box-shadow 0.15s;
-  align-self: stretch;
   min-height: 180px;
+  align-self: stretch;
+  min-width: 0;
 }
-.wf-card:hover { box-shadow: var(--shadow-md); }
+.wf-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99,102,241,0.3);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3), 0 0 16px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+}
 
-/* 颜色变体 */
-.mod-green  { border-color: #a7f3d0; }
-.mod-purple { border-color: #c4b5fd; }
-.mod-blue   { border-color: #93c5fd; }
-.mod-teal   { border-color: #67e8f9; }
-.mod-orange { border-color: #fcd34d; }
-.mod-gray   { border-color: var(--gray-mid); background: #f9fafb; }
-.mod-collab { border: 1.5px dashed #93c5fd; background: #f8fbff; }
+/* 左侧彩色竖条 */
+.mod-green  { box-shadow: inset 3px 0 0 #059669, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(5,150,105,0.2); }
+.mod-purple { box-shadow: inset 3px 0 0 #7c3aed, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(124,58,237,0.2); }
+.mod-blue   { box-shadow: inset 3px 0 0 #2563eb, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(37,99,235,0.2); }
+.mod-teal   { box-shadow: inset 3px 0 0 #0891b2, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(8,145,178,0.2); }
+.mod-orange { box-shadow: inset 3px 0 0 #d97706, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(217,119,6,0.2); }
+.mod-gray   { box-shadow: inset 3px 0 0 #4b5563, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(75,85,99,0.2); }
+.mod-collab { box-shadow: inset 3px 0 0 #2563eb, 0 2px 12px rgba(0,0,0,0.25); border-color: rgba(37,99,235,0.2); border-style: dashed; }
+.mod-dim    { opacity: 0.65; box-shadow: inset 3px 0 0 #374151, 0 2px 12px rgba(0,0,0,0.2); border-color: rgba(55,65,81,0.2); border-style: dashed; }
 
-/* ══ Step 徽章 — 数字突出卡片外 ══ */
-.wf-card { overflow: visible; }
+.mod-green:hover  { box-shadow: inset 3px 0 0 #059669, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(5,150,105,0.1); }
+.mod-purple:hover { box-shadow: inset 3px 0 0 #7c3aed, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(124,58,237,0.1); }
+.mod-blue:hover   { box-shadow: inset 3px 0 0 #2563eb, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(37,99,235,0.1); }
+.mod-teal:hover   { box-shadow: inset 3px 0 0 #0891b2, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(8,145,178,0.1); }
+.mod-orange:hover { box-shadow: inset 3px 0 0 #d97706, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(217,119,6,0.1); }
+.mod-collab:hover { box-shadow: inset 3px 0 0 #2563eb, 0 6px 24px rgba(0,0,0,0.3), 0 0 12px rgba(37,99,235,0.1); }
+
+/* Step 徽章 */
 .step-badge {
-  display: inline-flex; align-items: center; gap: 0;
+  display: inline-flex; align-items: center;
+  margin-top: -30px; margin-left: -4px;
   align-self: flex-start;
-  position: relative;
-  margin-top: -22px;
-  margin-left: -4px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  position: relative; z-index: 2;
   white-space: nowrap;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
 }
 .step-num {
-  font-size: 13px; font-weight: 900;
-  width: 28px; height: 28px;
-  border-radius: 8px 0 0 8px;
+  font-family: 'Orbitron', 'Courier New', monospace;
+  font-size: 9px; font-weight: 700;
+  width: 34px; height: 28px; flex-shrink: 0; border-radius: 8px 0 0 8px;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
 }
 .step-label {
-  font-size: 9px; font-weight: 800; letter-spacing: 1px;
-  text-transform: uppercase;
+  font-family: 'Orbitron', monospace;
+  font-size: 7px; font-weight: 700; letter-spacing: 1.5px;
   padding: 0 8px; height: 28px;
   display: flex; align-items: center;
   border-radius: 0 8px 8px 0;
 }
-.mod-green  .step-num   { background: #059669; color: #fff; }
-.mod-green  .step-label { background: #d1fae5; color: #065f46; }
-.mod-purple .step-num   { background: #7c3aed; color: #fff; }
-.mod-purple .step-label { background: #ede9fe; color: #4c1d95; }
-.mod-blue   .step-num   { background: #2563eb; color: #fff; }
-.mod-blue   .step-label { background: #dbeafe; color: #1e3a8a; }
-.mod-teal   .step-num   { background: #0891b2; color: #fff; }
-.mod-teal   .step-label { background: #cffafe; color: #164e63; }
-.mod-orange .step-num   { background: #d97706; color: #fff; }
-.mod-orange .step-label { background: #fef3c7; color: #92400e; }
-.mod-gray   .step-num   { background: #6b7280; color: #fff; }
-.mod-gray   .step-label { background: #f3f4f6; color: #374151; }
-.mod-collab .step-num   { background: #2563eb; color: #fff; }
-.mod-collab .step-label { background: #dbeafe; color: #1e40af; }
-.mod-dim {
-  border: 1.5px dashed #d1d5db !important;
-  background: #fafafa !important;
-  opacity: 0.75;
-}
-.mod-dim .step-num   { background: #9ca3af; color: #fff; }
-.mod-dim .step-label { background: #f3f4f6; color: #6b7280; }
+.mod-green  .step-num { background: #059669; color: #fff; }
+.mod-green  .step-label { background: rgba(5,150,105,0.2); color: #6ee7b7; }
+.mod-purple .step-num { background: #7c3aed; color: #fff; }
+.mod-purple .step-label { background: rgba(124,58,237,0.2); color: #c4b5fd; }
+.mod-blue   .step-num { background: #2563eb; color: #fff; }
+.mod-blue   .step-label { background: rgba(37,99,235,0.2); color: #93c5fd; }
+.mod-teal   .step-num { background: #0891b2; color: #fff; }
+.mod-teal   .step-label { background: rgba(8,145,178,0.2); color: #67e8f9; }
+.mod-orange .step-num { background: #d97706; color: #fff; }
+.mod-orange .step-label { background: rgba(217,119,6,0.2); color: #fcd34d; }
+.mod-gray   .step-num { background: #4b5563; color: #fff; }
+.mod-gray   .step-label { background: rgba(75,85,99,0.2); color: #9ca3af; }
+.mod-collab .step-num { background: #2563eb; color: #fff; }
+.mod-collab .step-label { background: rgba(37,99,235,0.2); color: #93c5fd; }
+.mod-dim    .step-num { background: #374151; color: #9ca3af; }
+.mod-dim    .step-label { background: rgba(55,65,81,0.2); color: #6b7280; }
 
 /* 模块标签 */
 .card-module-tag {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size: 10px; font-weight: 700; padding: 2px 7px;
-  border-radius: 8px; align-self: flex-start;
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 7px;
+  align-self: flex-start;
 }
 .card-module-row { display: flex; gap: 4px; flex-wrap: wrap; }
-.tag-green  { background: var(--green-light);  color: var(--green-dark); }
-.tag-purple { background: var(--purple-light); color: var(--purple-dark); }
-.tag-blue   { background: var(--blue-light);   color: var(--blue-dark); }
-.tag-teal   { background: var(--teal-light);   color: var(--teal-dark); }
-.tag-orange { background: var(--orange-light); color: var(--orange-dark); }
-.tag-gray   { background: var(--gray-light);   color: #4b5563; }
-.tag-collab { background: #dbeafe; color: #1e40af; }
+.tag-green  { background: rgba(5,150,105,0.15);  color: #6ee7b7; }
+.tag-purple { background: rgba(124,58,237,0.15); color: #c4b5fd; }
+.tag-blue   { background: rgba(37,99,235,0.15);  color: #93c5fd; }
+.tag-teal   { background: rgba(8,145,178,0.15);  color: #67e8f9; }
+.tag-orange { background: rgba(217,119,6,0.15);  color: #fcd34d; }
+.tag-gray   { background: rgba(75,85,99,0.15);   color: #9ca3af; }
+.tag-collab { background: rgba(37,99,235,0.15);  color: #93c5fd; }
 
 /* 卡片标题 */
-.card-title {
-  font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3;
-}
+.card-title { font-size: 15px; font-weight: 700; color: rgba(230,236,255,0.95); line-height: 1.3; }
 
 /* 状态标签 */
 .card-status {
   display: inline-flex; align-items: center;
-  font-size: 10px; font-weight: 700; padding: 2px 8px;
-  border-radius: 8px; align-self: flex-start;
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 7px;
+  align-self: flex-start;
 }
-.st-green  { background: var(--green-light);  color: var(--green-dark); }
-.st-yellow { background: #fef9c3; color: #713f12; }
-.st-orange { background: var(--orange-light); color: var(--orange-dark); }
-.st-blue   { background: var(--blue-light);   color: var(--blue-dark); }
-.st-teal   { background: var(--teal-light);   color: var(--teal-dark); }
-.st-gray   { background: var(--gray-light);   color: #6b7280; }
-.st-collab { background: #dbeafe; color: #1e40af; }
+.st-green  { background: rgba(5,150,105,0.15);  color: #6ee7b7; }
+.st-yellow { background: rgba(245,158,11,0.15); color: #fcd34d; }
+.st-orange { background: rgba(217,119,6,0.15);  color: #fbbf24; }
+.st-blue   { background: rgba(37,99,235,0.15);  color: #93c5fd; }
+.st-teal   { background: rgba(8,145,178,0.15);  color: #67e8f9; }
+.st-gray   { background: rgba(75,85,99,0.15);   color: #9ca3af; }
+.st-collab { background: rgba(37,99,235,0.15);  color: #93c5fd; }
 
 /* 小节标签 */
 .card-section-label {
-  font-size: 9px; font-weight: 700; color: #9ca3af;
+  font-size: 9px; font-weight: 700; color: rgba(165,180,252,0.35);
   letter-spacing: 0.8px; text-transform: uppercase;
 }
 
 /* 描述 */
-.card-desc {
-  font-size: 11px; color: var(--text-sub); line-height: 1.65;
-  flex: 1; /* 撑开剩余空间，让卡片底部对齐 */
-  min-height: 0;
-}
+.card-desc { font-size: 11px; color: rgba(165,180,252,0.6); line-height: 1.65; flex: 1; }
 
 /* 能力标签 */
 .card-caps { display: flex; flex-wrap: wrap; gap: 4px; }
-.cap-tag {
-  font-size: 10px; font-weight: 600; padding: 2px 7px;
-  border-radius: 7px; white-space: nowrap;
-}
-.cap-live  { background: #d1fae5; color: #065f46; }
-.cap-soon  { background: #fef9c3; color: #92400e; }
-.cap-plan  { background: #ede9fe; color: #4c1d95; }
-.cap-train { background: #ffedd5; color: #9a3412; }
-.cap-collab{ background: #dbeafe; color: #1e40af; }
+.cap-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 7px; white-space: nowrap; }
+.cap-live  { background: rgba(5,150,105,0.12);  color: #6ee7b7; }
+.cap-soon  { background: rgba(245,158,11,0.12); color: #fcd34d; }
+.cap-plan  { background: rgba(139,92,246,0.12); color: #c4b5fd; }
+.cap-train { background: rgba(217,119,6,0.12);  color: #fbbf24; }
+.cap-collab{ background: rgba(37,99,235,0.12);  color: #93c5fd; }
 
-/* 数据指标 */
-.card-metrics { display: flex; gap: 5px; flex-wrap: wrap; }
-.metric-chip {
-  font-size: 10px; font-weight: 700; padding: 2px 8px;
-  border-radius: 7px; background: #f3f4f6; color: #374151; white-space: nowrap;
-}
-
-/* 卡片内分隔线（投流合并用） */
-.card-divider {
-  height: 1px; background: var(--gray-mid); margin: 4px 0;
-}
+/* 卡片内分隔 */
+.card-divider { height: 1px; background: rgba(99,102,241,0.12); margin: 3px 0; }
 .card-sub-label {
-  font-size: 9px; font-weight: 700; color: #9ca3af;
-  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;
+  font-size: 9px; font-weight: 700; color: rgba(165,180,252,0.3);
+  letter-spacing: 0.8px; text-transform: uppercase;
 }
 
-/* 达人库聚合框已废弃，保留空定义避免报错 */
-.cluster-wrap, .cluster-label, .cluster-dot, .cluster-text,
-.cluster-inner, .cluster-sep { display: none; }
+/* 右上角状态 */
+.card-corner-status {
+  position: absolute; top: 10px; right: 12px;
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 7px;
+  white-space: nowrap;
+}
+.ccs-green { background: rgba(5,150,105,0.15); color: #6ee7b7; }
+
+/* ══ 达人库大卡 ══ */
+.exec-dual-card {
+  background: rgba(124,58,237,0.07);
+  border: 1px solid rgba(124,58,237,0.28);
+  border-radius: 12px; padding: 16px 18px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25), 0 0 0 1px rgba(124,58,237,0.12);
+  margin-bottom: 10px;
+  position: relative; overflow: visible;
+}
+.exec-dual-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.exec-dual-title { font-size: 11px; font-weight: 700; color: #c4b5fd; }
+.exec-dual-body { display: grid; grid-template-columns: 1fr 32px 1fr; align-items: start; }
+.exec-sub-card {
+  background: rgba(124,58,237,0.1);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 10px; padding: 16px 14px 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  position: relative; overflow: visible;
+}
+.exec-sub-card .step-badge { margin-top: -28px; margin-left: -2px; position: relative; z-index: 2; }
+.exec-sub-card .step-num  { background: #7c3aed; color: #fff; width: 34px; height: 24px; font-size: 9px; border-radius: 6px 0 0 6px; }
+.exec-sub-card .step-label{ background: rgba(124,58,237,0.2); color: #c4b5fd; font-size: 7px; height: 24px; border-radius: 0 6px 6px 0; }
+.exec-sub-arrow {
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(196,181,253,0.4); font-size: 22px; padding-top: 8px;
+}
+.exec-sub-arrow::after { content: '›'; }
+.exec-sub-title { font-size: 15px; font-weight: 700; color: rgba(230,236,255,0.9); }
+.exec-sub-desc  { font-size: 11px; color: rgba(165,180,252,0.55); line-height: 1.55; }
+.exec-sub-caps  { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+
+/* 复盘行 */
+.flow-row.recap-row .wf-card { min-height: 150px; }
+.flow-row.recap-row .card-title { font-size: 14px; }
 
 /* ══ 阶段分隔线 ══ */
 .phase-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gray-mid) 20%, var(--gray-mid) 80%, transparent);
-  margin: 4px 0;
+  height: 1px; margin: 20px 0 0;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.25) 20%, rgba(139,92,246,0.35) 50%, rgba(99,102,241,0.25) 80%, transparent);
+  box-shadow: 0 0 6px rgba(139,92,246,0.1);
 }
 
 /* ══ 闭环横幅 ══ */
 .loop-banner {
-  margin: 24px 0 8px;
-  display: flex; align-items: center; gap: 0;
+  display: flex; align-items: center; margin: 20px 0 6px;
 }
 .loop-line {
-  flex: 1; height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3));
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.4));
+  position: relative; overflow: hidden;
 }
-.loop-line.r {
-  background: linear-gradient(90deg, rgba(139,92,246,0.3), transparent);
+.loop-line::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.7), transparent);
+  animation: flow-dot 3s ease-in-out infinite;
 }
+.loop-line.r { background: linear-gradient(90deg, rgba(99,102,241,0.4), transparent); }
+.loop-line.r::after { animation-direction: reverse; }
 .loop-pill {
-  display: flex; align-items: center; gap: 8px;
-  padding: 9px 22px;
-  background: linear-gradient(135deg, #1e1b4b, #4c1d95);
-  color: white; border-radius: 24px;
-  font-size: 11px; font-weight: 700; white-space: nowrap;
-  box-shadow: 0 3px 14px rgba(76,29,149,0.3);
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+  padding: 8px 20px; border-radius: 20px;
+  background: rgba(10,8,32,0.8);
+  color: rgba(196,181,253,0.9);
+  border: 1px solid rgba(139,92,246,0.35);
+  box-shadow: 0 0 20px rgba(139,92,246,0.2);
+  white-space: nowrap;
 }
 .loop-sub {
-  text-align: center; font-size: 10px; color: #9ca3af; margin-top: 5px;
+  text-align: center; font-size: 10px;
+  color: rgba(139,92,246,0.4);
+  font-family: 'Orbitron', monospace; letter-spacing: 1px; margin-top: 4px;
 }
 
 /* ══ 产品模块总览 ══ */
 .modules-section {
-  margin-top: 32px; padding-top: 28px;
-  border-top: 1.5px solid var(--gray-mid);
+  margin-top: 28px; padding-top: 24px;
+  border-top: 1px solid rgba(99,102,241,0.15);
 }
 .modules-title {
   display: flex; align-items: center; gap: 10px;
-  font-size: 16px; font-weight: 800; margin-bottom: 16px;
+  font-size: 15px; font-weight: 800; color: rgba(220,228,255,0.9);
+  margin-bottom: 14px;
 }
 .modules-title-bar {
-  width: 4px; height: 18px;
-  background: linear-gradient(180deg, #4f46e5, #8b5cf6);
-  border-radius: 2px; flex-shrink: 0;
+  width: 3px; height: 16px;
+  background: linear-gradient(180deg, #6366f1, #8b5cf6);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(99,102,241,0.5);
 }
-.modules-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-}
+.modules-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .mod-card {
-  background: var(--white); border-radius: 14px; padding: 18px;
-  box-shadow: var(--shadow); border-top: 3px solid transparent;
-  display: flex; flex-direction: column; gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(99,102,241,0.15);
+  border-top: 2px solid transparent;
+  border-radius: 12px; padding: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: flex; flex-direction: column; gap: 8px;
 }
-.mod-card.green  { border-top-color: var(--green); }
-.mod-card.purple { border-top-color: var(--purple); }
-.mod-card.orange { border-top-color: var(--orange); }
-.mod-card.blue   { border-top-color: var(--blue); }
+.mod-card:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.mod-card.green  { border-top-color: #059669; }
+.mod-card.purple { border-top-color: #7c3aed; }
+.mod-card.orange { border-top-color: #d97706; }
+.mod-card.blue   { border-top-color: #2563eb; }
 
-.mod-card-header {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-}
-.mod-card-name { font-size: 14px; font-weight: 800; }
-.mod-card-name.green  { color: var(--green-dark); }
-.mod-card-name.purple { color: var(--purple-dark); }
-.mod-card-name.orange { color: var(--orange-dark); }
-.mod-card-name.blue   { color: var(--blue-dark); }
+.mod-card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mod-card-name { font-size: 13px; font-weight: 800; }
+.mod-card-name.green  { color: #6ee7b7; }
+.mod-card-name.purple { color: #c4b5fd; }
+.mod-card-name.orange { color: #fcd34d; }
+.mod-card-name.blue   { color: #93c5fd; }
 
-.mod-status {
-  font-size: 10px; font-weight: 700; padding: 2px 8px;
-  border-radius: 8px; white-space: nowrap;
-}
-.ms-green  { background: var(--green-light);  color: var(--green-dark); }
-.ms-yellow { background: #fef9c3; color: #713f12; }
-.ms-orange { background: var(--orange-light); color: var(--orange-dark); }
-.ms-blue   { background: var(--blue-light);   color: var(--blue-dark); }
+.mod-status { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+.ms-green  { background: rgba(5,150,105,0.15);  color: #6ee7b7; }
+.ms-yellow { background: rgba(245,158,11,0.15); color: #fcd34d; }
+.ms-orange { background: rgba(217,119,6,0.15);  color: #fbbf24; }
+.ms-blue   { background: rgba(37,99,235,0.15);  color: #93c5fd; }
 
-.mod-pillars { display: flex; flex-direction: column; gap: 6px; }
-.mod-pillar {
-  display: flex; align-items: flex-start; gap: 7px;
-  font-size: 11px; color: var(--text-sub); line-height: 1.55;
-}
-.mod-pillar-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  flex-shrink: 0; margin-top: 5px;
-}
-.mod-pillar-dot.green  { background: var(--green); }
-.mod-pillar-dot.purple { background: var(--purple); }
-.mod-pillar-dot.orange { background: var(--orange); }
-.mod-pillar-dot.blue   { background: var(--blue); }
-.mod-pillar-dot.teal   { background: var(--teal); }
+.mod-pillars { display: flex; flex-direction: column; gap: 5px; }
+.mod-pillar { display: flex; align-items: flex-start; gap: 6px; font-size: 11px; color: rgba(165,180,252,0.65); line-height: 1.6; }
+.mod-pillar-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.mod-pillar-dot.green  { background: #059669; }
+.mod-pillar-dot.purple { background: #7c3aed; }
+.mod-pillar-dot.orange { background: #d97706; }
+.mod-pillar-dot.blue   { background: #2563eb; }
+.mod-pillar-dot.teal   { background: #0891b2; }
 
 .mod-caps {
   display: flex; flex-wrap: wrap; gap: 4px;
-  padding-top: 6px; border-top: 1px solid var(--gray-light);
+  padding-top: 6px; border-top: 1px solid rgba(99,102,241,0.1);
 }
-.mod-card-desc {
-  font-size: 11px; color: var(--text-sub); line-height: 1.65;
-}
+.mod-card-desc { font-size: 11px; color: rgba(165,180,252,0.55); line-height: 1.65; }
 
 /* ══ Footer ══ */
 .footer {
   text-align: center; padding: 20px;
-  font-size: 11px; color: #9ca3af;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: rgba(99,102,241,0.3);
 }
+
+/* ══ 投屏按钮 ══ */
+.theme-toggle {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(165,180,252,0.25);
+  background: rgba(255,255,255,0.06);
+  color: rgba(165,180,252,0.6);
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+  margin-left: 12px;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.12);
+  color: rgba(165,180,252,0.95);
+  border-color: rgba(165,180,252,0.5);
+}
+
+/* ══ 浅色模式覆盖 ══ */
+body.light {
+  background: #f0f2f8;
+  color: #111827;
+}
+body.light .nav {
+  background: rgba(255,255,255,0.97);
+  border-bottom-color: rgba(99,102,241,0.15);
+}
+body.light .nav-brand { color: rgba(60,70,120,0.5); }
+body.light .nav-brand strong { color: #3730a3; }
+body.light .nav-link { color: rgba(60,70,120,0.5); }
+body.light .nav-link:hover { color: #3730a3; background: rgba(99,102,241,0.08); }
+body.light .theme-toggle {
+  border-color: rgba(99,102,241,0.3);
+  background: rgba(99,102,241,0.08);
+  color: #4338ca;
+}
+body.light .header { background: #e8eaf6; }
+body.light .header-grid {
+  background-image:
+    linear-gradient(rgba(99,102,241,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.1) 1px, transparent 1px);
+}
+body.light .header-title {
+  background: linear-gradient(180deg, #1e1b4b 0%, #3730a3 40%, #4338ca 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: none;
+}
+body.light .header-eyebrow { color: rgba(67,56,202,0.5); }
+body.light .header-infobar { background: rgba(255,255,255,0.75); border-color: rgba(99,102,241,0.25); }
+body.light .infobar-label { color: rgba(67,56,202,0.45); }
+body.light .ai-pill { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); }
+body.light .ai-pill-name { color: #3730a3; }
+body.light .ai-pill-state { color: rgba(67,56,202,0.5); }
+body.light .wf-card {
+  background: rgba(255,255,255,0.95);
+  border-color: rgba(99,102,241,0.12);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1);
+}
+body.light .mod-green  { box-shadow: inset 3px 0 0 #059669, 0 2px 10px rgba(0,0,0,0.07); border-color: #a7f3d0; }
+body.light .mod-purple { box-shadow: inset 3px 0 0 #7c3aed, 0 2px 10px rgba(0,0,0,0.07); border-color: #c4b5fd; }
+body.light .mod-blue   { box-shadow: inset 3px 0 0 #2563eb, 0 2px 10px rgba(0,0,0,0.07); border-color: #93c5fd; }
+body.light .mod-teal   { box-shadow: inset 3px 0 0 #0891b2, 0 2px 10px rgba(0,0,0,0.07); border-color: #67e8f9; }
+body.light .mod-orange { box-shadow: inset 3px 0 0 #d97706, 0 2px 10px rgba(0,0,0,0.07); border-color: #fcd34d; }
+body.light .mod-gray   { box-shadow: inset 3px 0 0 #6b7280, 0 2px 10px rgba(0,0,0,0.07); border-color: #e5e7eb; }
+body.light .mod-collab { box-shadow: inset 3px 0 0 #2563eb, 0 2px 10px rgba(0,0,0,0.07); border-color: #93c5fd; }
+body.light .mod-dim    { box-shadow: inset 3px 0 0 #9ca3af, 0 2px 10px rgba(0,0,0,0.05); border-color: #e5e7eb; }
+body.light .card-title { color: #111827; }
+body.light .card-desc  { color: #374151; }
+body.light .card-section-label { color: #6b7280; }
+body.light .card-sub-label { color: #9ca3af; }
+body.light .card-divider { background: #e5e7eb; }
+body.light .mod-green  .step-label { background: #d1fae5; color: #065f46; }
+body.light .mod-purple .step-label { background: #ede9fe; color: #4c1d95; }
+body.light .mod-blue   .step-label { background: #dbeafe; color: #1e3a8a; }
+body.light .mod-teal   .step-label { background: #cffafe; color: #164e63; }
+body.light .mod-orange .step-label { background: #fef3c7; color: #92400e; }
+body.light .mod-gray   .step-label { background: #f3f4f6; color: #374151; }
+body.light .mod-collab .step-label { background: #dbeafe; color: #1e40af; }
+body.light .mod-dim    .step-label { background: #f3f4f6; color: #6b7280; }
+body.light .tag-green  { background: #d1fae5; color: #065f46; }
+body.light .tag-purple { background: #ede9fe; color: #4c1d95; }
+body.light .tag-blue   { background: #dbeafe; color: #1e3a8a; }
+body.light .tag-teal   { background: #cffafe; color: #164e63; }
+body.light .tag-orange { background: #fef3c7; color: #92400e; }
+body.light .tag-gray   { background: #f3f4f6; color: #4b5563; }
+body.light .st-green   { background: #d1fae5; color: #065f46; }
+body.light .st-yellow  { background: #fef9c3; color: #713f12; }
+body.light .st-orange  { background: #fef3c7; color: #92400e; }
+body.light .st-blue    { background: #dbeafe; color: #1e3a8a; }
+body.light .st-teal    { background: #cffafe; color: #164e63; }
+body.light .st-gray    { background: #f3f4f6; color: #6b7280; }
+body.light .cap-tag.cap-live  { background: #d1fae5; color: #065f46; }
+body.light .cap-tag.cap-soon  { background: #fef9c3; color: #92400e; }
+body.light .cap-tag.cap-plan  { background: #ede9fe; color: #4c1d95; }
+body.light .cap-tag.cap-train { background: #ffedd5; color: #9a3412; }
+body.light .cap-tag.cap-collab{ background: #dbeafe; color: #1e40af; }
+body.light .ccs-green { background: #d1fae5; color: #065f46; }
+body.light .exec-dual-card { background: rgba(255,255,255,0.95); border-color: #c4b5fd; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+body.light .exec-dual-title { color: #7c3aed; }
+body.light .exec-sub-card { background: #faf5ff; border-color: #ede9fe; }
+body.light .exec-sub-card .step-label { background: #ede9fe; color: #4c1d95; }
+body.light .exec-sub-title { color: #111827; }
+body.light .exec-sub-desc  { color: #374151; }
+body.light .exec-sub-arrow { color: #c4b5fd; }
+body.light .phase-badge.pre    { background: #ede9fe; color: #4c1d95; border-color: #c4b5fd; box-shadow: none; }
+body.light .phase-badge.exec   { background: #d1fae5; color: #065f46; border-color: #a7f3d0; box-shadow: none; }
+body.light .phase-badge.recap  { background: #fef3c7; color: #92400e; border-color: #fcd34d; box-shadow: none; }
+body.light .phase-flow { color: #6b7280; }
+body.light .loop-pill { background: #1e1b4b; border-color: rgba(139,92,246,0.5); }
+body.light .loop-sub { color: rgba(99,102,241,0.5); }
+body.light .modules-section { border-top-color: rgba(99,102,241,0.15); }
+body.light .modules-title { color: #111827; }
+body.light .mod-card { background: #ffffff; border-color: #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+body.light .mod-card-name.green  { color: #065f46; }
+body.light .mod-card-name.purple { color: #4c1d95; }
+body.light .mod-card-name.orange { color: #92400e; }
+body.light .mod-card-name.blue   { color: #1e3a8a; }
+body.light .mod-pillar { color: #374151; }
+body.light .mod-caps { border-top-color: #f3f4f6; }
+body.light .footer { color: rgba(99,102,241,0.35); }
+body.light .header-bottomline,
+body.light .header-topline { opacity: 0.4; }
 </style>
 </head>
 <body>
 
 <!-- 导航 -->
 <nav class="nav">
-  <div class="nav-brand">市场部｜内容营销中心 · <strong>产品化体系进度</strong> · 2026 Q1–Q2</div>
+  <div class="nav-brand"><strong>CLC</strong> · 市场部内容营销中心 · 04.09 · 2026</div>
   <div class="nav-links">
     <a class="nav-link" href="#pre">投前准备</a>
     <a class="nav-link" href="#exec">投放执行</a>
     <a class="nav-link" href="#recap">复盘沉淀</a>
     <a class="nav-link" href="#modules">产品模块总览</a>
   </div>
+  <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">☀ 投屏模式</button>
 </nav>
 
 <!-- Header -->
 <div class="header">
-  <div class="header-top">
-    <span class="header-eyebrow">市场部 | 内容营销中心</span>
-    <div class="header-title">内容营销产品化体系进度</div>
-  </div>
-  <div class="header-infobar">
-    <!-- 基础能力 -->
-    <div class="infobar-section">
-      <span class="infobar-label">基础能力</span>
-      <div class="cap-chips">
-        <div class="cap-chip cc-green">
-          <span class="cap-chip-num">1</span>
-          <span class="cap-chip-name">内容库</span>
-          <span class="cap-chip-status">内容营销70%项目使用中</span>
-        </div>
-        <div class="cap-chip cc-yellow">
-          <span class="cap-chip-num">2</span>
-          <span class="cap-chip-name">达人库</span>
-          <span class="cap-chip-status">4月下旬</span>
-        </div>
-        <div class="cap-chip cc-blue">
-          <span class="cap-chip-num">3</span>
-          <span class="cap-chip-name">灵感榜单 + 竞品库</span>
-          <span class="cap-chip-status">需求待落定</span>
+  <div class="header-grid"></div>
+  <div class="header-topline"></div>
+  <div class="header-sweep"></div>
+  <div class="header-glow"></div>
+  <div class="header-bottomline"></div>
+  <div class="header-content">
+    <div class="header-eyebrow">MARKET DEPT · CONTENT MARKETING CENTER</div>
+    <div class="header-title">内容营销运营系统建设进度</div>
+    <div class="header-infobar">
+      <!-- 基础能力 -->
+      <div class="infobar-section">
+        <span class="infobar-label">基础能力</span>
+        <div class="cap-chips">
+          <div class="cap-chip cc-green">
+            <span class="cap-chip-name">内容库</span>
+            <span class="cap-chip-status">· 70%使用中</span>
+          </div>
+          <div class="cap-chip cc-yellow">
+            <span class="cap-chip-name">达人库</span>
+            <span class="cap-chip-status">· 验收中</span>
+          </div>
+          <div class="cap-chip cc-blue">
+            <span class="cap-chip-name">竞品库&amp;灵感榜单</span>
+            <span class="cap-chip-status">· 需求待落定</span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 分隔线 -->
-    <div class="infobar-divider"></div>
-    <!-- AI 能力 -->
-    <div class="infobar-section">
-      <span class="infobar-label">AI 能力</span>
-      <div class="ai-pills">
-        <div class="ai-pill">
-          <div class="ai-pill-dot" style="background:#a78bfa;"></div>
-          <span class="ai-pill-name">AI 选号</span>
-          <span class="ai-pill-state">实验中</span>
-        </div>
-        <div class="ai-pill">
-          <div class="ai-pill-dot" style="background:#fbbf24;"></div>
-          <span class="ai-pill-name">舆情 AI</span>
-          <span class="ai-pill-state">样板间建设中</span>
-        </div>
-        <div class="ai-pill">
-          <div class="ai-pill-dot" style="background:#34d399;"></div>
-          <span class="ai-pill-name">AI 写手</span>
-          <span class="ai-pill-state">训练中</span>
-        </div>
-        <div class="ai-pill">
-          <div class="ai-pill-dot" style="background:#93c5fd;"></div>
-          <span class="ai-pill-name">AI 审稿</span>
-          <span class="ai-pill-state">规划中</span>
+      <!-- AI 能力 -->
+      <div class="infobar-section">
+        <span class="infobar-label">AI 能力</span>
+        <div class="ai-pills">
+          <div class="ai-pill">
+            <div class="ai-pill-dot" style="background:#a78bfa;"></div>
+            <span class="ai-pill-name">AI选号</span>
+            <span class="ai-pill-state">· 实验中</span>
+          </div>
+          <div class="ai-pill">
+            <div class="ai-pill-dot" style="background:#fbbf24;"></div>
+            <span class="ai-pill-name">舆情AI</span>
+            <span class="ai-pill-state">· 建设中</span>
+          </div>
+          <div class="ai-pill">
+            <div class="ai-pill-dot" style="background:#34d399;"></div>
+            <span class="ai-pill-name">AI写手</span>
+            <span class="ai-pill-state">· 训练中</span>
+          </div>
+          <div class="ai-pill">
+            <div class="ai-pill-dot" style="background:#93c5fd;"></div>
+            <span class="ai-pill-name">AI审稿</span>
+            <span class="ai-pill-state">· 规划中</span>
+          </div>
         </div>
       </div>
     </div>
@@ -654,12 +754,10 @@ margin: 0; padding: 0;
         <span>项目策略制定</span>
       </div>
     </div>
-
-    <!-- 上行：Step 1–3 -->
     <div class="flow-row pre-row-top">
 
       <!-- Step 1 -->
-      <div class="wf-card mod-gray">
+      <div class="wf-card mod-gray" style="min-height:180px;">
         <div class="step-badge"><span class="step-num">1</span><span class="step-label">Step</span></div>
         <div class="card-title">业务需求对齐</div>
         <div class="card-section-label">现有作业方式</div>
@@ -677,24 +775,23 @@ margin: 0; padding: 0;
         </div>
         <div class="card-title">营销洞察</div>
         <div class="card-status st-blue">需求待落定</div>
-        <div class="card-desc">竞品库：友商真实投放素材分渠道结构化呈现，紧跟热点爆款；灵感榜单：对投放素材多维度排序，优质内容拆解复用，AI 生产语料库</div>
+        <div class="card-desc">竞品库：友商真实投放素材分渠道结构化呈现，紧跟热点爆款<br>灵感榜单：对投放素材多维度排序，优质内容拆解复用，AI 生产语料库</div>
       </div>
 
       <div class="flow-arrow"></div>
 
       <!-- Step 3 -->
-      <div class="wf-card mod-dim">
+      <div class="wf-card mod-dim" style="min-height:180px;">
         <div class="step-badge"><span class="step-num">3</span><span class="step-label">Step</span></div>
         <div class="card-title">项目策略制定</div>
         <div class="card-section-label">现有作业方式 + 部分能力支持</div>
         <div class="card-desc">内容策略、达人策略、渠道预算分配</div>
         <div class="card-divider"></div>
         <div class="card-sub-label">内容库 · 已有能力</div>
-        <div class="card-desc" style="flex:0 0 auto;"><span class="cap-tag" style="background:#d1fae5;color:#065f46;border:1px solid #a7f3d0;font-size:10px;padding:1px 7px;">内容库</span> 具备辅助功能</div>
+        <div class="card-desc" style="flex:0 0 auto;"><span class="cap-tag cap-live">内容库</span> 具备辅助功能</div>
       </div>
 
     </div>
-
   </div>
 
   <div class="phase-divider"></div>
@@ -712,38 +809,32 @@ margin: 0; padding: 0;
       </div>
     </div>
 
-    <!-- Step 4+5 达人筛选/建联 — 嵌套大卡 -->
+    <!-- Step 4+5 达人筛选/建联 -->
     <div class="flow-row exec-top">
       <div class="exec-dual-card">
         <div class="exec-dual-header">
-          <span class="card-module-tag tag-purple" style="margin:0;">达人库</span>
+          <span class="card-module-tag tag-purple">达人库</span>
           <span class="exec-dual-title">账号初筛至下单全流程</span>
           <span class="card-status st-yellow" style="margin-left:auto;">上线·验收中</span>
         </div>
         <div class="exec-dual-body">
-
-          <!-- 子卡 Step 4 -->
           <div class="exec-sub-card">
             <div class="step-badge"><span class="step-num">4</span><span class="step-label">Step</span></div>
             <div class="exec-sub-title">达人筛选</div>
-            <div class="exec-sub-desc"><strong>运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</div>
-            <div class="exec-sub-desc"><strong>数据整合展示</strong>：媒体及三方信息、历史合作数据</div>
-            <div class="exec-sub-desc"><strong>策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</div>
+            <div class="exec-sub-desc"><strong style="color:rgba(196,181,253,0.8);">运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</div>
+            <div class="exec-sub-desc"><strong style="color:rgba(196,181,253,0.8);">数据整合展示</strong>：媒体及三方信息、历史合作数据</div>
+            <div class="exec-sub-desc"><strong style="color:rgba(196,181,253,0.8);">策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</div>
             <div class="exec-sub-caps">
               <span class="cap-tag cap-soon">AI选号 · 实验中</span>
-              <span class="cap-tag cap-soon" style="background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd;">团购易生活项目</span>
+              <span class="cap-tag cap-plan">团购易生活项目</span>
             </div>
           </div>
-
           <div class="exec-sub-arrow"></div>
-
-          <!-- 子卡 Step 5 -->
           <div class="exec-sub-card">
             <div class="step-badge"><span class="step-num">5</span><span class="step-label">Step</span></div>
             <div class="exec-sub-title">建联沟通及下单确认</div>
             <div class="exec-sub-desc">对达人账号进行二次筛选（调性/创意/配合度），锁定档期与报价，并完成下单最终确认&amp;合规审核</div>
           </div>
-
         </div>
       </div>
     </div>
@@ -758,8 +849,8 @@ margin: 0; padding: 0;
         <div class="card-module-tag tag-green">内容库</div>
         <div class="card-title">内容审核</div>
         <div class="card-status st-green">内容营销 70% 项目使用中</div>
-        <div class="card-desc"><strong>运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</div>
-        <div class="card-desc"><strong>全流程合规管控</strong>：审核留痕、机审拦截</div>
+        <div class="card-desc"><strong style="color:rgba(110,231,183,0.8);">运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</div>
+        <div class="card-desc"><strong style="color:rgba(110,231,183,0.8);">全流程合规管控</strong>：审核留痕、机审拦截</div>
         <div class="card-caps">
           <span class="cap-tag cap-plan">AI审稿 · 规划中</span>
           <span class="cap-tag cap-train">AI写手 · 训练中</span>
@@ -775,7 +866,7 @@ margin: 0; padding: 0;
         <div class="card-module-tag tag-green">内容库</div>
         <div class="card-title">内容发布回填</div>
         <div class="card-status st-green">内容营销 70% 项目使用中</div>
-        <div class="card-desc"><strong>内容资产沉淀</strong>：营销素材入库归档</div>
+        <div class="card-desc"><strong style="color:rgba(110,231,183,0.8);">内容资产沉淀</strong>：营销素材入库归档</div>
         <div class="card-desc">发布后数据回填及实际结算金额录入，为项目复盘提供完整数据支撑</div>
       </div>
 
@@ -811,7 +902,6 @@ margin: 0; padding: 0;
         <span>舆情/心智评估</span>
       </div>
     </div>
-
     <div class="flow-row recap-row">
 
       <!-- Step 9 -->
@@ -885,9 +975,9 @@ margin: 0; padding: 0;
           <div class="mod-status ms-green">上线·应用中</div>
         </div>
         <div class="mod-pillars">
-          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</span></div>
-          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>全流程合规管控</strong>：审核留痕、机审拦截</span></div>
-          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong>内容资产沉淀</strong>：营销素材入库归档</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong style="color:rgba(110,231,183,0.8);">运营线上化</strong>：并行项目管理、审核线上、PC 移动双端</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong style="color:rgba(110,231,183,0.8);">全流程合规管控</strong>：审核留痕、机审拦截</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot green"></div><span><strong style="color:rgba(110,231,183,0.8);">内容资产沉淀</strong>：营销素材入库归档</span></div>
         </div>
         <div class="mod-caps">
           <span class="cap-tag cap-plan">AI审稿 · 规划中</span>
@@ -901,13 +991,13 @@ margin: 0; padding: 0;
           <div class="mod-status ms-yellow">上线·验收中</div>
         </div>
         <div class="mod-pillars">
-          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</span></div>
-          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>数据整合展示</strong>：媒体及三方信息、历史合作数据</span></div>
-          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong>策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong style="color:rgba(196,181,253,0.8);">运营线上化</strong>：并行项目管理、账号筛选、建联下单状态</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong style="color:rgba(196,181,253,0.8);">数据整合展示</strong>：媒体及三方信息、历史合作数据</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot purple"></div><span><strong style="color:rgba(196,181,253,0.8);">策略显性化</strong>：历史信息辅助决策、运营经验输入 AI 选号</span></div>
         </div>
         <div class="mod-caps">
           <span class="cap-tag cap-soon">AI选号 · 实验中</span>
-          <span class="cap-tag cap-soon" style="background:#ede9fe;color:#5b21b6;border:1px solid #c4b5fd;">团购易生活项目</span>
+          <span class="cap-tag cap-plan">团购易生活项目</span>
         </div>
       </div>
 
@@ -916,7 +1006,6 @@ margin: 0; padding: 0;
           <div class="mod-card-name orange">舆情AI</div>
           <div class="mod-status ms-orange">样板间建设中</div>
         </div>
-        <div class="mod-card-desc">通过 AI 识别噪音与真实反馈，辅助业务识别用户情感变化和真实需求。</div>
         <div class="mod-pillars">
           <div class="mod-pillar"><div class="mod-pillar-dot orange"></div><span>评论区自动化打标</span></div>
           <div class="mod-pillar"><div class="mod-pillar-dot orange"></div><span>UGC 情感倾向分析</span></div>
@@ -930,12 +1019,12 @@ margin: 0; padding: 0;
 
       <div class="mod-card blue">
         <div class="mod-card-header">
-          <div class="mod-card-name blue" style="font-size:13px;">竞品库 + 灵感榜单</div>
+          <div class="mod-card-name blue" style="font-size:12px;">竞品库 + 灵感榜单</div>
           <div class="mod-status ms-blue">需求待落定</div>
         </div>
         <div class="mod-pillars">
-          <div class="mod-pillar"><div class="mod-pillar-dot blue"></div><span><strong>竞品库</strong>：友商素材分渠道结构化归档，热点爆款追踪，有效植入形式沉淀</span></div>
-          <div class="mod-pillar"><div class="mod-pillar-dot teal"></div><span><strong>灵感榜单</strong>：素材多维度排序，优质内容复用二创，AI 生产语料库</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot blue"></div><span><strong style="color:rgba(147,197,253,0.8);">竞品库</strong>：友商素材分渠道结构化归档，热点爆款追踪，有效植入形式沉淀</span></div>
+          <div class="mod-pillar"><div class="mod-pillar-dot teal"></div><span><strong style="color:rgba(103,232,249,0.8);">灵感榜单</strong>：素材多维度排序，优质内容复用二创，AI 生产语料库</span></div>
         </div>
       </div>
 
@@ -944,7 +1033,7 @@ margin: 0; padding: 0;
 
 </div>
 
-<div class="footer">内容营销产品化体系进度 · 市场部｜内容营销中心 · 2026年4月</div>
+<div class="footer">CLC · 市场部内容营销中心 · 04.09 · 2026</div>
 
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -954,6 +1043,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  const btn = document.getElementById('themeBtn');
+  btn.textContent = isLight ? '🌙 深色模式' : '☀ 投屏模式';
+}
 </script>
 </body>
 </html>
