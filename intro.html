@@ -192,32 +192,34 @@ html, body {
 }
 
 @keyframes cta-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0), 0 0 20px rgba(99,102,241,0.3); }
-  50%       { box-shadow: 0 0 0 8px rgba(99,102,241,0), 0 0 32px rgba(99,102,241,0.6); }
+  0%, 100% { box-shadow: 0 0 16px rgba(139,92,246,0.4), 0 0 40px rgba(99,102,241,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+  50%       { box-shadow: 0 0 28px rgba(139,92,246,0.7), 0 0 60px rgba(99,102,241,0.4), inset 0 1px 0 rgba(255,255,255,0.15); }
+}
+@keyframes cta-arrow {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(4px); }
 }
 .cta-btn {
-display: flex; align-items: center; justify-content: center; gap: 10px;
-background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.2));
-color: #e0e7ff;
+display: flex; align-items: center; justify-content: center;
+flex-direction: column; gap: 5px;
+background: linear-gradient(135deg, rgba(109,40,217,0.6), rgba(79,70,229,0.55));
+color: #fff;
 font-family: 'Orbitron', monospace;
-
-  padding: clamp(7px,.9vh,10px) clamp(13px,1.4vw,18px);
+font-size: 12px; letter-spacing: 2.5px;
+padding: 16px 20px;
 border-radius: 10px; text-decoration: none;
-border: 1px solid rgba(139,92,246,0.6);
+border: 1px solid rgba(167,139,250,0.7);
 transition: all .2s;
-width: 100%; margin-top: 8px;
-padding: 14px 20px;
-font-size: 11px; letter-spacing: 2.5px;
-box-shadow: 0 0 20px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
-animation: cta-pulse 2.5s ease-in-out infinite;
-flex-direction: column; gap: 4px;
+width: 100%; margin-top: 10px;
+animation: cta-pulse 2.2s ease-in-out infinite;
+cursor: pointer;
 }
-.cta-btn-main { display: flex; align-items: center; gap: 8px; }
-.cta-btn-sub { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 11px; letter-spacing: 0.5px; color: rgba(165,180,252,0.55); font-weight: 400; }
-.cta-btn:hover { background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(139,92,246,0.35)); border-color: rgba(139,92,246,0.9); color: #fff; box-shadow: 0 0 32px rgba(99,102,241,0.5), inset 0 1px 0 rgba(255,255,255,0.12); }
-.cta-btn:hover .cta-btn-sub { color: rgba(196,181,253,0.8); }
-.cta-btn svg { width: 12px; height: 12px; transition: transform .2s; }
-.cta-btn:hover svg { transform: translateX(4px); }
+.cta-btn-main { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.cta-btn-sub { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 12px; letter-spacing: 1px; color: rgba(221,214,254,0.75); font-weight: 400; }
+.cta-btn:hover { background: linear-gradient(135deg, rgba(124,58,237,0.85), rgba(99,102,241,0.8)); border-color: #a78bfa; color: #fff; transform: translateY(-1px); }
+.cta-btn:hover .cta-btn-sub { color: rgba(221,214,254,0.95); }
+.cta-btn svg { width: 14px; height: 14px; animation: cta-arrow 1.4s ease-in-out infinite; }
+.cta-btn:hover svg { animation: none; transform: translateX(5px); }
 
 /* ── 右栏 ── */
 .card-right {
