@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>设计方向对比</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", sans-serif; background: #0a0820; }
+
+/* ══ 布局 ══ */
+.compare-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.panel {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.panel-label {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 2px; font-weight: 700;
+  padding: 5px 16px; border-radius: 20px; z-index: 100;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   方向 A：全页赛博朋克深色
+══════════════════════════════ */
+.panel-a {
+  background: #050310;
+}
+.panel-a::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 30% at 80% 60%, rgba(139,92,246,0.1) 0%, transparent 50%);
+}
+.panel-a .panel-label {
+  background: rgba(99,102,241,0.2);
+  border: 1px solid rgba(99,102,241,0.4);
+  color: #a5b4fc;
+}
+
+/* A 的导航 */
+.a-nav {
+  background: rgba(5,3,16,0.9);
+  border-bottom: 1px solid rgba(99,102,241,0.2);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.a-nav-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 2px; color: rgba(165,180,252,0.5);
+}
+.a-nav-brand strong { color: rgba(165,180,252,0.9); }
+
+/* A 的 header */
+.a-header {
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid rgba(99,102,241,0.15);
+  position: relative;
+}
+.a-header::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.8), transparent);
+  box-shadow: 0 0 12px rgba(139,92,246,0.5);
+}
+.a-eyebrow {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 3px; color: rgba(165,180,252,0.35);
+  margin-bottom: 6px;
+}
+.a-title {
+  font-size: 20px; font-weight: 800; letter-spacing: 1px;
+  background: linear-gradient(180deg, #fff 0%, #e0e8ff 40%, #c8d0e8 70%, #fff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+
+/* A 的内容区 */
+.a-content { padding: 20px 24px; }
+.a-section-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 1.5px; font-weight: 700;
+  color: rgba(165,180,252,0.4);
+  padding: 4px 12px; border-radius: 20px;
+  border: 1px solid rgba(99,102,241,0.25);
+  background: rgba(99,102,241,0.08);
+  display: inline-block; margin-bottom: 14px;
+}
+.a-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.a-card {
+  background: rgba(15,12,40,0.7);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 12px;
+  padding: 14px 16px 14px 18px;
+  backdrop-filter: blur(12px);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.a-card::before {
+  content: ''; position: absolute; left: 0; top: 12px; bottom: 12px;
+  width: 3px; border-radius: 3px;
+}
+.a-card.green::before  { background: linear-gradient(180deg, #059669, #34d399); box-shadow: 0 0 8px rgba(5,150,105,0.5); }
+.a-card.purple::before { background: linear-gradient(180deg, #7c3aed, #a78bfa); box-shadow: 0 0 8px rgba(124,58,237,0.5); }
+.a-card.blue::before   { background: linear-gradient(180deg, #2563eb, #60a5fa); box-shadow: 0 0 8px rgba(37,99,235,0.5); }
+.a-card.orange::before { background: linear-gradient(180deg, #d97706, #fbbf24); box-shadow: 0 0 8px rgba(217,119,6,0.5); }
+.a-card-step {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.a-card.green  .a-card-step { color: #34d399; }
+.a-card.purple .a-card-step { color: #a78bfa; }
+.a-card.blue   .a-card-step { color: #60a5fa; }
+.a-card.orange .a-card-step { color: #fbbf24; }
+.a-card-title {
+  font-size: 13px; font-weight: 700; color: rgba(240,244,255,0.92);
+  margin-bottom: 4px;
+}
+.a-card-desc {
+  font-size: 10px; color: rgba(165,180,252,0.55); line-height: 1.6;
+}
+.a-tag {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  padding: 2px 7px; border-radius: 6px; margin-top: 6px;
+}
+.a-tag.green  { background: rgba(5,150,105,0.2);  color: #34d399; border: 1px solid rgba(5,150,105,0.3); }
+.a-tag.yellow { background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+.a-tag.purple { background: rgba(124,58,237,0.2); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
+
+/* A 的闭环横幅 */
+.a-loop {
+  display: flex; align-items: center; gap: 0; margin: 16px 0 8px;
+}
+.a-loop-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.5));
+  position: relative; overflow: hidden;
+}
+.a-loop-line.r { background: linear-gradient(90deg, rgba(99,102,241,0.5), transparent); }
+.a-loop-pill {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  padding: 7px 16px; border-radius: 20px;
+  background: linear-gradient(135deg, #0a0820, #1e1b4b, #4c1d95);
+  color: white; border: 1px solid rgba(139,92,246,0.4);
+  box-shadow: 0 0 20px rgba(139,92,246,0.25);
+  white-space: nowrap;
+}
+
+/* A 的模块总览 */
+.a-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.a-mod {
+  background: rgba(15,12,40,0.6);
+  border: 1px solid rgba(99,102,241,0.15);
+  border-radius: 10px; padding: 12px 14px;
+  backdrop-filter: blur(8px);
+}
+.a-mod-name { font-size: 12px; font-weight: 700; color: rgba(220,228,255,0.9); margin-bottom: 4px; }
+.a-mod-status { font-size: 9px; color: rgba(165,180,252,0.5); }
+
+/* ══════════════════════════════
+   方向 B：深色Header + 浅色内容
+══════════════════════════════ */
+.panel-b {
+  background: #eef0f5;
+  border-left: 1px solid rgba(0,0,0,0.08);
+}
+.panel-b .panel-label {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #4c1d95;
+}
+
+/* B 的导航 */
+.b-nav {
+  background: rgba(5,3,16,0.95);
+  border-bottom: 1px solid rgba(99,102,241,0.2);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.b-nav-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 2px; color: rgba(165,180,252,0.5);
+}
+.b-nav-brand strong { color: rgba(165,180,252,0.9); }
+
+/* B 的 header */
+.b-header {
+  background: linear-gradient(160deg, #050310 0%, #1e1b4b 45%, #312e81 75%, #4c1d95 100%);
+  padding: 24px 24px 20px;
+  position: relative; overflow: hidden;
+}
+.b-header::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.8), transparent);
+  box-shadow: 0 0 12px rgba(139,92,246,0.5);
+}
+.b-header::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+}
+.b-eyebrow {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 3px; color: rgba(165,180,252,0.4);
+  margin-bottom: 6px; position: relative; z-index: 1;
+}
+.b-title {
+  font-size: 20px; font-weight: 800; letter-spacing: 1px;
+  background: linear-gradient(180deg, #fff 0%, #e8ecf8 20%, #c8d0e8 40%, #f0f4ff 60%, #d0d8f0 80%, #fff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+  position: relative; z-index: 1;
+}
+.b-infobar {
+  margin-top: 14px;
+  background: rgba(10,8,32,0.4);
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 10px; padding: 8px 14px;
+  display: flex; gap: 12px; align-items: center;
+  backdrop-filter: blur(12px);
+  width: fit-content; position: relative; z-index: 1;
+}
+.b-chip {
+  font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px;
+  white-space: nowrap;
+}
+.b-chip.green  { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+.b-chip.yellow { background: rgba(245,158,11,0.2); color: #fcd34d; }
+.b-chip.blue   { background: rgba(59,130,246,0.2); color: #93c5fd; }
+
+/* B 的内容区 */
+.b-content { padding: 20px 24px; background: #eef0f5; }
+.b-section-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; letter-spacing: 1.5px; font-weight: 700;
+  color: #4c1d95;
+  padding: 4px 12px; border-radius: 20px;
+  border: 1px solid #c4b5fd;
+  background: #ede9fe;
+  display: inline-block; margin-bottom: 14px;
+  box-shadow: 0 0 8px rgba(139,92,246,0.15);
+}
+.b-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.b-card {
+  background: #ffffff;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 14px 16px 14px 18px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.15s;
+}
+.b-card.green  { box-shadow: inset 4px 0 0 #059669, 0 2px 10px rgba(0,0,0,0.07); border-color: #a7f3d0; }
+.b-card.purple { box-shadow: inset 4px 0 0 #7c3aed, 0 2px 10px rgba(0,0,0,0.07); border-color: #c4b5fd; }
+.b-card.blue   { box-shadow: inset 4px 0 0 #2563eb, 0 2px 10px rgba(0,0,0,0.07); border-color: #93c5fd; }
+.b-card.orange { box-shadow: inset 4px 0 0 #d97706, 0 2px 10px rgba(0,0,0,0.07); border-color: #fcd34d; }
+.b-card-step {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.b-card.green  .b-card-step { color: #059669; }
+.b-card.purple .b-card-step { color: #7c3aed; }
+.b-card.blue   .b-card-step { color: #2563eb; }
+.b-card.orange .b-card-step { color: #d97706; }
+.b-card-title { font-size: 13px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+.b-card-desc  { font-size: 10px; color: #374151; line-height: 1.6; }
+.b-tag {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  padding: 2px 7px; border-radius: 6px; margin-top: 6px;
+}
+.b-tag.green  { background: #d1fae5; color: #065f46; }
+.b-tag.yellow { background: #fef9c3; color: #92400e; }
+.b-tag.purple { background: #ede9fe; color: #4c1d95; }
+
+/* B 的闭环横幅 */
+.b-loop {
+  display: flex; align-items: center; gap: 0; margin: 16px 0 8px;
+}
+.b-loop-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3));
+}
+.b-loop-line.r { background: linear-gradient(90deg, rgba(99,102,241,0.3), transparent); }
+.b-loop-pill {
+  font-family: 'Orbitron', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  padding: 7px 16px; border-radius: 20px;
+  background: linear-gradient(135deg, #1e1b4b, #4c1d95);
+  color: white; border: 1px solid rgba(139,92,246,0.3);
+  box-shadow: 0 3px 12px rgba(76,29,149,0.3);
+  white-space: nowrap;
+}
+
+/* B 的模块总览 */
+.b-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.b-mod {
+  background: #fff; border-radius: 10px; padding: 12px 14px;
+  border-top: 3px solid transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.b-mod.green  { border-top-color: #10b981; }
+.b-mod.purple { border-top-color: #8b5cf6; }
+.b-mod.orange { border-top-color: #f59e0b; }
+.b-mod.blue   { border-top-color: #3b82f6; }
+.b-mod-name { font-size: 12px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+.b-mod-status { font-size: 9px; color: #6b7280; }
+
+/* 分隔线 */
+.divider { height: 1px; background: rgba(99,102,241,0.15); margin: 12px 0; }
+.b-divider { height: 1px; background: #e5e7eb; margin: 12px 0; }
+</style>
+</head>
+<body>
+<div class="compare-wrap">
+
+  <!-- ══ 方向 A ══ -->
+  <div class="panel panel-a">
+    <div class="panel-label">方向 A · 全页赛博朋克</div>
+
+    <div class="a-nav">
+      <div class="a-nav-brand"><strong>CLC</strong> · 市场部内容营销中心 · 04.09 · 2026</div>
+    </div>
+
+    <div class="a-header">
+      <div class="a-eyebrow">MARKET DEPT · CONTENT MARKETING CENTER █</div>
+      <div class="a-title">内容营销运营系统建设进度</div>
+    </div>
+
+    <div class="a-content">
+      <div class="a-section-label">01 · 投前准备</div>
+      <div class="a-cards">
+        <div class="a-card green">
+          <div class="a-card-step">STEP 01</div>
+          <div class="a-card-title">业务需求对齐</div>
+          <div class="a-card-desc">需求接收与评估、口径及目标确认</div>
+          <span class="a-tag green">现有作业方式</span>
+        </div>
+        <div class="a-card purple">
+          <div class="a-card-step">STEP 02</div>
+          <div class="a-card-title">营销洞察</div>
+          <div class="a-card-desc">竞品库 · 灵感榜单，紧跟热点爆款</div>
+          <span class="a-tag yellow">需求待落定</span>
+        </div>
+        <div class="a-card blue">
+          <div class="a-card-step">STEP 04</div>
+          <div class="a-card-title">达人筛选</div>
+          <div class="a-card-desc">运营线上化，并行项目管理</div>
+          <span class="a-tag yellow">上线·验收中</span>
+        </div>
+        <div class="a-card orange">
+          <div class="a-card-step">STEP 06</div>
+          <div class="a-card-title">内容审核</div>
+          <div class="a-card-desc">全流程合规管控，审核留痕</div>
+          <span class="a-tag green">70% 项目使用中</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="a-loop">
+        <div class="a-loop-line"></div>
+        <div class="a-loop-pill">↺ &nbsp;复盘数据反哺投前 · 形成产品化闭环</div>
+        <div class="a-loop-line r"></div>
+      </div>
+
+      <div class="a-modules">
+        <div class="a-mod">
+          <div class="a-mod-name">内容库</div>
+          <div class="a-mod-status">上线·应用中</div>
+        </div>
+        <div class="a-mod">
+          <div class="a-mod-name">达人库</div>
+          <div class="a-mod-status">上线·验收中</div>
+        </div>
+        <div class="a-mod">
+          <div class="a-mod-name">舆情 AI</div>
+          <div class="a-mod-status">样板间建设中</div>
+        </div>
+        <div class="a-mod">
+          <div class="a-mod-name">竞品库 + 灵感榜单</div>
+          <div class="a-mod-status">需求待落定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 方向 B ══ -->
+  <div class="panel panel-b">
+    <div class="panel-label">方向 B · 深色Header + 浅色内容</div>
+
+    <div class="b-nav">
+      <div class="b-nav-brand"><strong>CLC</strong> · 市场部内容营销中心 · 04.09 · 2026</div>
+    </div>
+
+    <div class="b-header">
+      <div class="b-eyebrow">MARKET DEPT · CONTENT MARKETING CENTER █</div>
+      <div class="b-title">内容营销运营系统建设进度</div>
+      <div class="b-infobar">
+        <span class="b-chip green">① 内容库 · 70%使用中</span>
+        <span class="b-chip yellow">② 达人库 · 验收中</span>
+        <span class="b-chip blue">③ 竞品库 · 待落定</span>
+      </div>
+    </div>
+
+    <div class="b-content">
+      <div class="b-section-label">01 · 投前准备</div>
+      <div class="b-cards">
+        <div class="b-card green">
+          <div class="b-card-step">STEP 01</div>
+          <div class="b-card-title">业务需求对齐</div>
+          <div class="b-card-desc">需求接收与评估、口径及目标确认</div>
+          <span class="b-tag green">现有作业方式</span>
+        </div>
+        <div class="b-card purple">
+          <div class="b-card-step">STEP 02</div>
+          <div class="b-card-title">营销洞察</div>
+          <div class="b-card-desc">竞品库 · 灵感榜单，紧跟热点爆款</div>
+          <span class="b-tag yellow">需求待落定</span>
+        </div>
+        <div class="b-card blue">
+          <div class="b-card-step">STEP 04</div>
+          <div class="b-card-title">达人筛选</div>
+          <div class="b-card-desc">运营线上化，并行项目管理</div>
+          <span class="b-tag yellow">上线·验收中</span>
+        </div>
+        <div class="b-card orange">
+          <div class="b-card-step">STEP 06</div>
+          <div class="b-card-title">内容审核</div>
+          <div class="b-card-desc">全流程合规管控，审核留痕</div>
+          <span class="b-tag green">70% 项目使用中</span>
+        </div>
+      </div>
+
+      <div class="b-divider"></div>
+
+      <div class="b-loop">
+        <div class="b-loop-line"></div>
+        <div class="b-loop-pill">↺ &nbsp;复盘数据反哺投前 · 形成产品化闭环</div>
+        <div class="b-loop-line r"></div>
+      </div>
+
+      <div class="b-modules">
+        <div class="b-mod green">
+          <div class="b-mod-name">内容库</div>
+          <div class="b-mod-status">上线·应用中</div>
+        </div>
+        <div class="b-mod purple">
+          <div class="b-mod-name">达人库</div>
+          <div class="b-mod-status">上线·验收中</div>
+        </div>
+        <div class="b-mod orange">
+          <div class="b-mod-name">舆情 AI</div>
+          <div class="b-mod-status">样板间建设中</div>
+        </div>
+        <div class="b-mod blue">
+          <div class="b-mod-name">竞品库 + 灵感榜单</div>
+          <div class="b-mod-status">需求待落定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

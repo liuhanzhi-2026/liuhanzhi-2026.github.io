@@ -192,34 +192,24 @@ html, body {
 }
 
 @keyframes cta-pulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(139,92,246,0.4), 0 0 40px rgba(99,102,241,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
-  50%       { box-shadow: 0 0 28px rgba(139,92,246,0.7), 0 0 60px rgba(99,102,241,0.4), inset 0 1px 0 rgba(255,255,255,0.15); }
-}
-@keyframes cta-arrow {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(4px); }
+  0%, 100% { box-shadow: 0 0 10px rgba(139,92,246,0.35), 0 0 28px rgba(99,102,241,0.18); }
+  50%       { box-shadow: 0 0 18px rgba(139,92,246,0.65), 0 0 44px rgba(99,102,241,0.35); }
 }
 .cta-btn {
-display: flex; align-items: center; justify-content: center;
-flex-direction: column; gap: 5px;
-background: linear-gradient(135deg, rgba(109,40,217,0.6), rgba(79,70,229,0.55));
-color: #fff;
-font-family: 'Orbitron', monospace;
-font-size: 12px; letter-spacing: 2.5px;
-padding: 16px 20px;
-border-radius: 10px; text-decoration: none;
-border: 1px solid rgba(167,139,250,0.7);
-transition: all .2s;
-width: 100%; margin-top: 10px;
-animation: cta-pulse 2.2s ease-in-out infinite;
-cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, rgba(109,40,217,0.55), rgba(79,70,229,0.5));
+  color: rgba(220,210,255,0.92);
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(8px, 0.8vw, 10px); letter-spacing: 2px;
+  padding: clamp(7px,.9vh,10px) clamp(13px,1.4vw,18px);
+  border-radius: 4px; text-decoration: none;
+  border: 1px solid rgba(139,92,246,0.55);
+  transition: all .2s; white-space: nowrap; align-self: flex-start;
+  animation: cta-pulse 2.4s ease-in-out infinite;
 }
-.cta-btn-main { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.cta-btn-sub { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 12px; letter-spacing: 1px; color: rgba(221,214,254,0.75); font-weight: 400; }
-.cta-btn:hover { background: linear-gradient(135deg, rgba(124,58,237,0.85), rgba(99,102,241,0.8)); border-color: #a78bfa; color: #fff; transform: translateY(-1px); }
-.cta-btn:hover .cta-btn-sub { color: rgba(221,214,254,0.95); }
-.cta-btn svg { width: 14px; height: 14px; animation: cta-arrow 1.4s ease-in-out infinite; }
-.cta-btn:hover svg { animation: none; transform: translateX(5px); }
+.cta-btn:hover { background: linear-gradient(135deg, rgba(124,58,237,0.8), rgba(99,102,241,0.75)); border-color: #a78bfa; color: #fff; transform: translateY(-1px); }
+.cta-btn svg { width: 10px; height: 10px; transition: transform .2s; }
+.cta-btn:hover svg { transform: translateX(3px); }
 
 /* ── 右栏 ── */
 .card-right {
@@ -330,13 +320,10 @@ cursor: pointer;
             <div class="meta-sep"></div>
             <span class="meta-dept"><span class="dept-en">CLC</span>市场部 · 内容营销中心</span>
           </div>
-          <a class="cta-btn" href="index.html" target="_blank">
-            <div class="cta-btn-main">
-              ACCESS PROGRESS
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </div>
-            <div class="cta-btn-sub">查看系统建设进度 →</div>
-          </a>
+<a class="cta-btn" href="index.html" target="_blank">
+ACCESS PROGRESS
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+</a>
         </div>
       </div>
 
